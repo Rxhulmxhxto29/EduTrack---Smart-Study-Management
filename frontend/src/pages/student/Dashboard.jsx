@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import StudentLayout from '../../components/layout/StudentLayout';
 import Card from '../../components/common/Card';
+import { useAuth } from '../../contexts/AuthContext';
 import { 
   BookOpen, FileText, Calendar, Clock, CheckCircle, Lightbulb, Target, Plus, Zap,
   TrendingUp, AlertTriangle, Edit2, Trash2, X, Play, Star, Bell, ArrowRight,
@@ -85,6 +86,7 @@ const ProgressRing = ({ progress, size = 120, strokeWidth = 10 }) => {
 
 function StudentDashboard() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   
   const [subjects, setSubjects] = useState(DEFAULT_SUBJECTS);
   const [deadlines, setDeadlines] = useState(DEFAULT_DEADLINES);
@@ -262,8 +264,8 @@ function StudentDashboard() {
                 <Sparkles className="w-5 h-5 text-yellow-300 animate-pulse" />
                 <span className="text-sm font-medium text-white/80">{greeting}</span>
               </div>
-              <h1 className="text-3xl lg:text-4xl font-bold mb-2">Welcome back, Student! 👋</h1>
-              <p className="text-white/80 text-lg mb-4">Computer Science • Semester 5</p>
+              <h1 className="text-3xl lg:text-4xl font-bold mb-2">Welcome back, {user?.name?.split(' ')[0] || 'Student'}! 👋</h1>
+              <p className="text-white/80 text-lg mb-4">{user?.branch || 'Computer Science'} • Semester {user?.semester || 5}</p>
               
               <div className="flex flex-wrap gap-3 mt-4">
                 <div className="flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-xl px-4 py-2">
