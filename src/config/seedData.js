@@ -16,6 +16,7 @@ const Timetable = require('../models/Timetable');
 const Progress = require('../models/Progress');
 const Announcement = require('../models/Announcement');
 const UserData = require('../models/UserData');
+const Flashcard = require('../models/Flashcard');
 
 const seedDatabase = async () => {
   console.log('\n📦 Seeding database with sample data...\n');
@@ -1169,6 +1170,228 @@ Cables, Hubs, Bits transmission
 
     console.log('  ✅ User preferences & data created');
 
+    // ==================== 9. CREATE FLASHCARDS ====================
+    const flashcards = await Flashcard.create([
+      // DSA Flashcards
+      {
+        createdBy: student._id,
+        subject: subjects[0]._id,
+        subjectName: subjects[0].name,
+        unit: allUnits[0]._id,
+        question: 'What is the time complexity of binary search?',
+        answer: 'O(log n) - Binary search divides the search space in half with each iteration, making it logarithmic.',
+        hint: 'Think about how many times you can divide n by 2',
+        tags: ['algorithms', 'time-complexity', 'searching'],
+        difficulty: 'easy',
+        deck: 'DSA Fundamentals',
+        studyStats: {
+          totalReviews: 3,
+          correctCount: 2,
+          lastReviewed: new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000),
+          nextReview: new Date(now.getTime() + 1 * 24 * 60 * 60 * 1000)
+        },
+        interval: 3,
+        easeFactor: 2.6
+      },
+      {
+        createdBy: student._id,
+        subject: subjects[0]._id,
+        subjectName: subjects[0].name,
+        unit: allUnits[1]._id,
+        question: 'Explain the difference between Stack and Queue',
+        answer: 'Stack follows LIFO (Last In First Out) principle - last element added is first to be removed. Queue follows FIFO (First In First Out) - first element added is first to be removed.',
+        tags: ['data-structures', 'stack', 'queue'],
+        difficulty: 'easy',
+        deck: 'DSA Fundamentals',
+        studyStats: {
+          totalReviews: 5,
+          correctCount: 5,
+          lastReviewed: new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000),
+          nextReview: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+        },
+        interval: 7,
+        easeFactor: 2.8
+      },
+      {
+        createdBy: student._id,
+        subject: subjects[0]._id,
+        subjectName: subjects[0].name,
+        unit: allUnits[2]._id,
+        question: 'What is the height of a balanced binary tree with n nodes?',
+        answer: 'log₂(n) - A balanced tree maintains roughly equal heights in left and right subtrees, resulting in logarithmic height.',
+        hint: 'Related to binary search complexity',
+        tags: ['trees', 'binary-tree', 'height'],
+        difficulty: 'medium',
+        deck: 'Trees & Graphs',
+        studyStats: {
+          totalReviews: 2,
+          correctCount: 1,
+          lastReviewed: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000),
+          nextReview: new Date()
+        },
+        interval: 1,
+        easeFactor: 2.3
+      },
+
+      // DBMS Flashcards
+      {
+        createdBy: student._id,
+        subject: subjects[1]._id,
+        subjectName: subjects[1].name,
+        unit: allUnits[3]._id,
+        question: 'What are the ACID properties in DBMS?',
+        answer: 'A - Atomicity: All or nothing transaction\nC - Consistency: Database remains in valid state\nI - Isolation: Concurrent transactions don\'t interfere\nD - Durability: Committed changes persist',
+        tags: ['transactions', 'acid', 'database-theory'],
+        difficulty: 'medium',
+        deck: 'DBMS Concepts',
+        studyStats: {
+          totalReviews: 4,
+          correctCount: 3,
+          lastReviewed: new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000),
+          nextReview: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000)
+        },
+        interval: 5,
+        easeFactor: 2.5
+      },
+      {
+        createdBy: student._id,
+        subject: subjects[1]._id,
+        subjectName: subjects[1].name,
+        unit: allUnits[4]._id,
+        question: 'What is normalization and why is it important?',
+        answer: 'Normalization is the process of organizing database tables to reduce redundancy and dependency. It ensures data integrity, eliminates anomalies, and makes database maintenance easier.',
+        tags: ['normalization', 'database-design'],
+        difficulty: 'medium',
+        deck: 'DBMS Concepts',
+        studyStats: {
+          totalReviews: 0,
+          correctCount: 0
+        },
+        interval: 1,
+        easeFactor: 2.5
+      },
+
+      // OS Flashcards
+      {
+        createdBy: student._id,
+        subject: subjects[2]._id,
+        subjectName: subjects[2].name,
+        unit: allUnits[5]._id,
+        question: 'Explain the difference between Process and Thread',
+        answer: 'Process is an independent program in execution with its own memory space. Thread is a lightweight unit of execution within a process that shares the same memory space with other threads.',
+        tags: ['process', 'thread', 'concurrency'],
+        difficulty: 'easy',
+        deck: 'OS Fundamentals',
+        studyStats: {
+          totalReviews: 6,
+          correctCount: 6,
+          lastReviewed: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000),
+          nextReview: new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000)
+        },
+        interval: 14,
+        easeFactor: 2.9
+      },
+      {
+        createdBy: student._id,
+        subject: subjects[2]._id,
+        subjectName: subjects[2].name,
+        unit: allUnits[6]._id,
+        question: 'What is a deadlock and what are its necessary conditions?',
+        answer: 'Deadlock is when two or more processes are waiting indefinitely for resources held by each other. Four necessary conditions: 1) Mutual Exclusion 2) Hold and Wait 3) No Preemption 4) Circular Wait',
+        hint: 'Four conditions must all be present',
+        tags: ['deadlock', 'synchronization', 'resource-management'],
+        difficulty: 'hard',
+        deck: 'OS Fundamentals',
+        studyStats: {
+          totalReviews: 3,
+          correctCount: 2,
+          lastReviewed: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000),
+          nextReview: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000)
+        },
+        interval: 3,
+        easeFactor: 2.4
+      },
+
+      // Networks Flashcards
+      {
+        createdBy: student._id,
+        subject: subjects[3]._id,
+        subjectName: subjects[3].name,
+        question: 'What is the difference between TCP and UDP?',
+        answer: 'TCP is connection-oriented, reliable, ordered delivery with error checking and flow control. UDP is connectionless, unreliable, faster, no guarantee of delivery or order. TCP for accuracy, UDP for speed.',
+        tags: ['tcp', 'udp', 'protocols'],
+        difficulty: 'medium',
+        deck: 'Networking',
+        studyStats: {
+          totalReviews: 2,
+          correctCount: 2,
+          lastReviewed: new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000),
+          nextReview: new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000)
+        },
+        interval: 4,
+        easeFactor: 2.6
+      },
+
+      // Web Dev Flashcards
+      {
+        createdBy: student._id,
+        subject: subjects[4]._id,
+        subjectName: subjects[4].name,
+        question: 'What is the Virtual DOM in React?',
+        answer: 'Virtual DOM is a lightweight JavaScript representation of the actual DOM. React uses it to optimize updates by comparing (diffing) the virtual DOM with the real DOM and only updating what changed.',
+        tags: ['react', 'virtual-dom', 'performance'],
+        difficulty: 'medium',
+        deck: 'Web Development',
+        studyStats: {
+          totalReviews: 1,
+          correctCount: 1,
+          lastReviewed: new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000),
+          nextReview: new Date(now.getTime() + 1 * 24 * 60 * 60 * 1000)
+        },
+        interval: 2,
+        easeFactor: 2.5
+      },
+
+      // Discrete Math Flashcards
+      {
+        createdBy: student._id,
+        subject: subjects[5]._id,
+        subjectName: subjects[5].name,
+        question: 'What is the Pigeonhole Principle?',
+        answer: 'If n items are placed into m containers and n > m, then at least one container must contain more than one item. Used in proofs and combinatorics.',
+        hint: 'More pigeons than holes',
+        tags: ['combinatorics', 'proof-technique'],
+        difficulty: 'easy',
+        deck: 'Math Fundamentals',
+        studyStats: {
+          totalReviews: 0,
+          correctCount: 0
+        },
+        interval: 1,
+        easeFactor: 2.5
+      },
+      {
+        createdBy: student._id,
+        subject: subjects[5]._id,
+        subjectName: subjects[5].name,
+        question: 'Define a relation that is reflexive, symmetric, and transitive',
+        answer: 'An equivalence relation. Reflexive: aRa for all a. Symmetric: aRb implies bRa. Transitive: aRb and bRc implies aRc. Example: equality (=) is an equivalence relation.',
+        tags: ['relations', 'equivalence', 'set-theory'],
+        difficulty: 'hard',
+        deck: 'Math Fundamentals',
+        studyStats: {
+          totalReviews: 1,
+          correctCount: 0,
+          lastReviewed: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000),
+          nextReview: new Date()
+        },
+        interval: 1,
+        easeFactor: 2.3
+      }
+    ]);
+
+    console.log('  ✅ 12 Flashcards created with study stats');
+
     // ==================== SUMMARY ====================
     console.log('\n' + '─'.repeat(50));
     console.log('📊 Seed Data Summary:');
@@ -1181,6 +1404,7 @@ Cables, Hubs, Bits transmission
     console.log(`  📅 Timetable:     ${timetableEntries.length} entries`);
     console.log(`  📈 Progress:      ${progressRecords.length} records`);
     console.log(`  📢 Announcements: ${announcements.length}`);
+    console.log(`  🃏 Flashcards:    ${flashcards.length} (with spaced repetition)`);
     console.log('─'.repeat(50));
     console.log('\n  🔑 Login: student@edutrack.com / student123\n');
 

@@ -16,6 +16,7 @@ const progressRoutes = require('./src/routes/progressRoutes');
 const announcementRoutes = require('./src/routes/announcementRoutes');
 const aiRoutes = require('./src/routes/aiRoutes');
 const userDataRoutes = require('./src/routes/userDataRoutes');
+const flashcardRoutes = require('./src/routes/flashcardRoutes');
 const seedDatabase = require('./src/config/seedData');
 
 // Initialize express app
@@ -70,7 +71,8 @@ app.get('/', (req, res) => {
       progress: '/api/progress',
       announcements: '/api/announcements',
       ai: '/api/ai',
-      userData: '/api/user-data'
+      userData: '/api/user-data',
+      flashcards: '/api/flashcards'
     }
   });
 });
@@ -119,6 +121,7 @@ app.use('/api/progress', progressRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/user-data', userDataRoutes);
+app.use('/api/flashcards', flashcardRoutes);
 
 // 404 handler
 app.use((req, res) => {
