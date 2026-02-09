@@ -61,7 +61,7 @@ function Assignments() {
   const [newCustomSubject, setNewCustomSubject] = useState('');
   
   // Get all subjects (default + custom + API)
-  const ALL_SUBJECTS = [...DEFAULT_SUBJECTS, ...customSubjects, ...apiSubjects.map(s => s.name)];
+  const ALL_SUBJECTS = [...DEFAULT_SUBJECTS, ...customSubjects, ...(Array.isArray(apiSubjects) ? apiSubjects.map(s => s.name) : [])];
 
   // Add custom subject
   const addCustomSubject = (formType, setForm, form) => {
@@ -156,7 +156,7 @@ function Assignments() {
     const fetchFlashcards = async () => {
       try {
         setFlashcardsLoading(true);
-        const response = await api.get('/flashcards');
+        const response = await api.get('/api/flashcards');
         setFlashcards(response.data.data.flashcards || []);
       } catch (error) {
         console.error('Error fetching flashcards:', error);
@@ -167,8 +167,9 @@ function Assignments() {
     };
     const fetchSubjects = async () => {
       try {
-        const response = await api.get('/subjects');
-        setApiSubjects(response.data.data || []);
+        const response = await api.get('/api/subjects');
+        const data = response.data.data;
+        setApiSubjects(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching subjects:', error);
       }
@@ -249,7 +250,7 @@ function Assignments() {
         return;
       }
       
-      const response = await api.post('/flashcards', {
+      const response = await api.post('/api/flashcards', {
         question: flashcardForm.question,
         answer: flashcardForm.answer,
         subject: subjectId,
@@ -269,7 +270,7 @@ function Assignments() {
 
   const deleteFlashcard = async (id) => {
     try {
-      await api.delete(`/flashcards/${id}`);
+      await api.delete(`/api/flashcards/${id}`);
       setFlashcards(flashcards.filter(f => f._id !== id));
       toast.success('Flashcard deleted');
     } catch (error) {
@@ -506,7 +507,7 @@ function Assignments() {
     <StudentLayout>
       <div className="space-y-8">
         {/* Hero Header */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 p-8 text-white">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 via-red-500 to-rose-600 p-8 text-white">
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
@@ -514,7 +515,7 @@ function Assignments() {
           <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div className="flex items-center gap-6">
               <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
-                <Rocket className="w-12 h-12" />
+                <Target className="w-12 h-12" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold">Study Hub</h1>

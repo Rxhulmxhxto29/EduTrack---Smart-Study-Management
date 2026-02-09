@@ -40,7 +40,7 @@ export const getData = async (key, defaultValue = null) => {
   const localKey = `edutrack_${key}`;
   
   try {
-    const response = await api.get(`/user-data/${apiKey}`);
+    const response = await api.get(`/api/user-data/${apiKey}`);
     if (response.data?.success && response.data?.data?.data !== null) {
       // Also update localStorage as cache
       localStorage.setItem(localKey, JSON.stringify(response.data.data.data));
@@ -70,7 +70,7 @@ export const saveData = async (key, data) => {
   localStorage.setItem(localKey, JSON.stringify(data));
   
   try {
-    const response = await api.post(`/user-data/${apiKey}`, { data });
+    const response = await api.post(`/api/user-data/${apiKey}`, { data });
     return response.data?.success || false;
   } catch (error) {
     console.log(`Backend save failed for ${key}, saved to localStorage only`);
@@ -83,7 +83,7 @@ export const saveData = async (key, data) => {
  */
 export const getAllData = async () => {
   try {
-    const response = await api.get('/user-data');
+    const response = await api.get('/api/user-data');
     if (response.data?.success) {
       const data = response.data.data.data || {};
       
@@ -132,7 +132,7 @@ export const bulkSave = async (items) => {
       data
     }));
     
-    const response = await api.post('/user-data/bulk', { items: apiItems });
+    const response = await api.post('/api/user-data/bulk', { items: apiItems });
     return response.data?.success || false;
   } catch (error) {
     console.log('Bulk save to backend failed, saved to localStorage only');

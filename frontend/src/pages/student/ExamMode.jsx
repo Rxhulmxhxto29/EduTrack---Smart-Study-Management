@@ -498,7 +498,7 @@ function ExamMode() {
     <StudentLayout>
       <div className="space-y-8">
         {/* Hero Header */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-500 via-pink-600 to-purple-600 p-8 text-white">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500 via-orange-500 to-orange-600 p-8 text-white">
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
@@ -506,7 +506,7 @@ function ExamMode() {
           <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div className="flex items-center gap-6">
               <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
-                <Target className="w-12 h-12" />
+                <Zap className="w-12 h-12" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold">Exam Mode</h1>
