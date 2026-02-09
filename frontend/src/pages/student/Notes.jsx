@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import StudentLayout from '../../components/layout/StudentLayout';
 import Card from '../../components/common/Card';
-import SmartSearch from '../../components/common/SmartSearch';
 import { Search, Plus, Edit2, Trash2, X, FileText, Upload, File, Image, Download, Eye, Star, Heart, Filter, Tag, BookOpen, Sparkles, FolderOpen, Zap, Brain, AlertTriangle, CheckCircle, TrendingUp, Copy, RefreshCw, Loader } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../../services/api';
@@ -106,7 +105,6 @@ function Notes() {
   });
   
   // AI-related state
-  const [showSmartSearch, setShowSmartSearch] = useState(false);
   const [analyzingNotes, setAnalyzingNotes] = useState(false);
   const [duplicates, setDuplicates] = useState([]);
   const [showDuplicateAlert, setShowDuplicateAlert] = useState(false);
@@ -317,11 +315,7 @@ function Notes() {
     }
   };
 
-  // Handle smart search result selection
-  const handleSmartSearchResult = (note) => {
-    navigate(`/notes/${note._id}`);
-    setShowSmartSearch(false);
-  };
+
 
   // Get all subjects (default + custom)
   const ALL_SUBJECTS = [...DEFAULT_SUBJECTS, ...customSubjects];
@@ -699,19 +693,6 @@ function Notes() {
             </div>
           </div>
         </div>
-
-        {/* Smart Search */}
-        <Card className="!p-4 relative z-20">
-          <div className="flex items-center gap-2 mb-3">
-            <Brain className="w-5 h-5 text-indigo-500" />
-            <h3 className="font-semibold text-gray-900 dark:text-white">AI Smart Search</h3>
-            <span className="text-xs px-2 py-0.5 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400 rounded-full">Beta</span>
-          </div>
-          <SmartSearch 
-            onResultSelect={handleSmartSearchResult}
-            className="w-full"
-          />
-        </Card>
 
         {/* Search & Filters */}
         <Card className="!p-0 overflow-hidden">
