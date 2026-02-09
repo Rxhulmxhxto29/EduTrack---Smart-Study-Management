@@ -15,6 +15,10 @@
 
 [Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Tech Stack](#-tech-stack) • [API Documentation](#-api-documentation)
 
+### 🎥 Live Demo
+Check out the project showcase and walkthrough on LinkedIn:
+👉 [View Live Demo](https://www.linkedin.com/posts/rahul-mahato-0b1534254_webdevelopment-fullstack-javascript-activity-7426733289874407424-5Vqo)
+
 </div>
 
 ---
