@@ -13,24 +13,17 @@ exports.getAllAnnouncements = asyncHandler(async (req, res) => {
 
   const filter = { isActive: true };
 
-  // Filter by target audience
-  if (req.user.role === 'student') {
-    filter.$or = [
-      { targetAudience: 'all' },
-      { targetAudience: 'students' },
-      {
-        targetAudience: 'specific-class',
-        branch: req.user.branch,
-        semester: req.user.semester,
-        sections: { $in: [req.user.section, null, []] }
-      }
-    ];
-  } else if (req.user.role === 'teacher') {
-    filter.$or = [
-      { targetAudience: 'all' },
-      { targetAudience: 'teachers' }
-    ];
-  }
+  // Filter by target audience - show all relevant announcements to student
+  filter.$or = [
+    { targetAudience: 'all' },
+    { targetAudience: 'students' },
+    {
+      targetAudience: 'specific-class',
+      branch: req.user.branch,
+      semester: req.user.semester,
+      sections: { $in: [req.user.section, null, []] }
+    }
+  ];
 
   if (type) filter.type = type;
   if (priority) filter.priority = priority;
@@ -158,8 +151,7 @@ exports.updateAnnouncement = asyncHandler(async (req, res) => {
   }
 
   // Check ownership
-  if (req.user.role !== 'admin' && 
-      announcement.createdBy.toString() !== req.user._id.toString()) {
+  if (announcement.createdBy.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to update this announcement');
   }
 
@@ -196,8 +188,7 @@ exports.deleteAnnouncement = asyncHandler(async (req, res) => {
   }
 
   // Check ownership
-  if (req.user.role !== 'admin' && 
-      announcement.createdBy.toString() !== req.user._id.toString()) {
+  if (announcement.createdBy.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to delete this announcement');
   }
 

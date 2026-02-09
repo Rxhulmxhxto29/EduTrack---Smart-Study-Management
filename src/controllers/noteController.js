@@ -317,8 +317,7 @@ exports.updateNote = asyncHandler(async (req, res) => {
   }
 
   // Check ownership
-  if (req.user.role !== 'admin' && 
-      note.uploadedBy.toString() !== req.user._id.toString()) {
+  if (note.uploadedBy.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to update this note');
   }
 
@@ -418,8 +417,7 @@ exports.deleteNote = asyncHandler(async (req, res) => {
   }
 
   // Check ownership
-  if (req.user.role !== 'admin' && 
-      note.uploadedBy.toString() !== req.user._id.toString()) {
+  if (note.uploadedBy.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to delete this note');
   }
 

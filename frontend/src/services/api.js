@@ -27,10 +27,15 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
-      toast.error('Session expired. Please login again.');
+      const isAuthRoute = error.config?.url?.includes('/api/auth/');
+      if (!isAuthRoute) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('edutrack_user_profile');
+        // Redirect to login if not already there
+        if (window.location.pathname !== '/login') {
+          window.location.href = '/login';
+        }
+      }
     }
     return Promise.reject(error);
   }

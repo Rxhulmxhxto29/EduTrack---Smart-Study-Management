@@ -11,6 +11,10 @@ const connectMemoryDB = async () => {
     mongoServer = await MongoMemoryServer.create({
       instance: {
         dbName: 'edutrack',
+        launchTimeout: 60000,
+      },
+      binary: {
+        downloadDir: undefined,
       },
     });
 

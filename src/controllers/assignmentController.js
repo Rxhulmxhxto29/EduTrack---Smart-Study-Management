@@ -303,8 +303,7 @@ exports.updateAssignment = asyncHandler(async (req, res) => {
   }
 
   // Check ownership
-  if (req.user.role !== 'admin' && 
-      assignment.createdBy.toString() !== req.user._id.toString()) {
+  if (assignment.createdBy.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to update this assignment');
   }
 
@@ -340,8 +339,7 @@ exports.deleteAssignment = asyncHandler(async (req, res) => {
   }
 
   // Check ownership
-  if (req.user.role !== 'admin' && 
-      assignment.createdBy.toString() !== req.user._id.toString()) {
+  if (assignment.createdBy.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to delete this assignment');
   }
 

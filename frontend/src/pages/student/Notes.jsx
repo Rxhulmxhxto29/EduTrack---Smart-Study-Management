@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import StudentLayout from '../../components/layout/StudentLayout';
 import Card from '../../components/common/Card';
 import SmartSearch from '../../components/common/SmartSearch';
@@ -79,10 +79,11 @@ const saveFavorites = (favorites) => {
 
 function Notes() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const fileInputRef = useRef(null);
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [filterSubject, setFilterSubject] = useState('');
   const [filterTag, setFilterTag] = useState('');
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
@@ -117,6 +118,14 @@ function Notes() {
     fetchNotes();
   }, []);
 
+  // Sync search query from URL params
+  useEffect(() => {
+    const urlSearch = searchParams.get('search');
+    if (urlSearch) {
+      setSearchQuery(urlSearch);
+    }
+  }, [searchParams]);
+
   // Fetch notes from backend
   const fetchNotes = async () => {
     setLoading(true);
@@ -127,7 +136,15 @@ function Notes() {
       });
       const data = await res.json();
       if (data.success) {
-        setNotes(data.data);
+        // API returns { data: { notes: [...], pagination: {...} } }
+        const notesArray = Array.isArray(data.data) ? data.data : (data.data?.notes || []);
+        // Normalize populated object fields (subject, unit) to plain strings
+        const normalized = notesArray.map(note => ({
+          ...note,
+          subject: note.subject && typeof note.subject === 'object' ? note.subject.name : note.subject,
+          unit: note.unit && typeof note.unit === 'object' ? note.unit.name : note.unit,
+        }));
+        setNotes(normalized);
       } else {
         // Fallback to localStorage if backend fails
         const stored = localStorage.getItem('edutrack_notes');

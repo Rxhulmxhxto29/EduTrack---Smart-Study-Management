@@ -3,10 +3,11 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
-const setupDatabase = require('./src/config/simpleDatabase');
+const setupDatabase = require('./src/config/database');
 const errorHandler = require('./src/middleware/errorHandler');
 
 // Import routes
+const authRoutes = require('./src/routes/authRoutes');
 const subjectRoutes = require('./src/routes/subjectRoutes');
 const noteRoutes = require('./src/routes/noteRoutes');
 const assignmentRoutes = require('./src/routes/assignmentRoutes');
@@ -15,6 +16,7 @@ const progressRoutes = require('./src/routes/progressRoutes');
 const announcementRoutes = require('./src/routes/announcementRoutes');
 const aiRoutes = require('./src/routes/aiRoutes');
 const userDataRoutes = require('./src/routes/userDataRoutes');
+const seedDatabase = require('./src/config/seedData');
 
 // Initialize express app
 const app = express();
@@ -24,8 +26,18 @@ console.log('\n' + '='.repeat(60));
 console.log('🎓 EduTrack - Smart Student Study Management System');
 console.log('='.repeat(60) + '\n');
 
-// Setup database
-setupDatabase().catch(err => {
+// Setup database and seed data
+setupDatabase().then(async () => {
+  // Seed data for in-memory database (fresh data on each restart)
+  const useMemoryDB = process.env.USE_MEMORY_DB === 'true' || !process.env.MONGODB_URI;
+  if (useMemoryDB) {
+    try {
+      await seedDatabase();
+    } catch (err) {
+      console.error('⚠️ Seeding failed:', err.message);
+    }
+  }
+}).catch(err => {
   console.error('❌ Database setup failed:', err.message);
 });
 
@@ -98,6 +110,7 @@ app.post('/api/upload', (req, res) => {
 });
 
 // API Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/subjects', subjectRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/assignments', assignmentRoutes);
@@ -120,11 +133,15 @@ app.use(errorHandler);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, () => {
   console.log(`🚀 EduTrack Backend running on port ${PORT}`);
   console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🌐 URL: http://localhost:${PORT}`);
 }).on('error', (err) => {
   console.error('❌ Server error:', err.message);
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${PORT} is already in use. Kill the process and try again.`);
+  }
   process.exit(1);
 });
 

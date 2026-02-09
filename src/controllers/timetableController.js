@@ -119,8 +119,8 @@ exports.updateTimetableEntry = asyncHandler(async (req, res) => {
     throw ApiError.notFound('Timetable entry not found');
   }
 
-  // Check ownership or admin
-  if (entry.user.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+  // Check ownership
+  if (entry.user.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to update this entry');
   }
 
@@ -157,8 +157,8 @@ exports.deleteTimetableEntry = asyncHandler(async (req, res) => {
     throw ApiError.notFound('Timetable entry not found');
   }
 
-  // Check ownership or admin
-  if (entry.user.toString() !== req.user._id.toString() && req.user.role !== 'admin') {
+  // Check ownership
+  if (entry.user.toString() !== req.user._id.toString()) {
     throw ApiError.forbidden('Not authorized to delete this entry');
   }
 

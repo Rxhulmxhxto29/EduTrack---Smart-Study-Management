@@ -40,7 +40,8 @@ import {
   Equal,
   Percent,
   PanelLeftClose,
-  PanelLeft
+  PanelLeft,
+  LogOut
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -55,6 +56,7 @@ function StudentLayout({ children }) {
   const [notifications, setNotifications] = useState([]);
   const [showCalculator, setShowCalculator] = useState(false);
   const [showNotepad, setShowNotepad] = useState(false);
+  const [headerSearch, setHeaderSearch] = useState('');
   
   // Calculator state
   const [calcDisplay, setCalcDisplay] = useState('0');
@@ -74,7 +76,7 @@ function StudentLayout({ children }) {
   
   // Real-time clock state
   const [currentTime, setCurrentTime] = useState(new Date());
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { darkMode, toggleDarkMode } = useTheme();
   const { examModeActive, toggleExamMode } = useExamMode();
   const location = useLocation();
@@ -724,6 +726,18 @@ function StudentLayout({ children }) {
               )}
             </div>
 
+            {/* Sign Out */}
+            <button
+              onClick={() => { logout(); navigate('/login'); }}
+              className={`flex items-center ${sidebarCollapsed ? 'justify-center p-2' : 'gap-2 px-3 py-2'} mt-3 w-full rounded-xl
+                       text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20
+                       transition-colors text-sm font-medium`}
+              title={sidebarCollapsed ? 'Sign Out' : undefined}
+            >
+              <LogOut className="w-4 h-4" />
+              {!sidebarCollapsed && <span>Sign Out</span>}
+            </button>
+
             {/* Collapse Toggle Button */}
             <button
               onClick={toggleSidebarCollapse}
@@ -809,12 +823,20 @@ function StudentLayout({ children }) {
               </div>
             </div>
 
-            {/* Center: Search Bar (optional) */}
+            {/* Center: Search Bar */}
             <div className="hidden md:flex flex-1 max-w-md mx-8">
-              <div className="relative w-full">
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                if (headerSearch.trim()) {
+                  navigate(`/notes?search=${encodeURIComponent(headerSearch.trim())}`);
+                  setHeaderSearch('');
+                }
+              }} className="relative w-full">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input 
                   type="text"
+                  value={headerSearch}
+                  onChange={(e) => setHeaderSearch(e.target.value)}
                   placeholder="Search notes, topics..."
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl
                            bg-gray-100/80 dark:bg-gray-800/80 
@@ -825,7 +847,7 @@ function StudentLayout({ children }) {
                            placeholder:text-gray-400 dark:placeholder:text-gray-500
                            transition-all duration-300 ease-out"
                 />
-              </div>
+              </form>
             </div>
 
             {/* Right: Actions */}
@@ -1013,18 +1035,18 @@ function StudentLayout({ children }) {
 
                 {/* Calculator Dropdown */}
                 {showCalculator && (
-                  <div className="absolute right-0 top-full mt-2 w-80
+                  <div className="absolute right-0 top-full mt-2 w-64
                                 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl shadow-gray-300/50 dark:shadow-black/50
                                 border border-gray-200 dark:border-gray-700
                                 overflow-hidden z-50 
                                 animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-200">
                     {/* Calculator Header */}
-                    <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700
+                    <div className="px-3 py-2 border-b border-gray-200 dark:border-gray-700
                                   bg-gradient-to-r from-emerald-500/10 to-teal-500/10">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Calculator className="w-5 h-5 text-emerald-500" />
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                        <div className="flex items-center gap-1.5">
+                          <Calculator className="w-4 h-4 text-emerald-500" />
+                          <h3 className="font-semibold text-sm text-gray-900 dark:text-white">
                             Scientific Calculator
                           </h3>
                         </div>
@@ -1044,11 +1066,11 @@ function StudentLayout({ children }) {
                     </div>
 
                     {/* Display */}
-                    <div className="p-3 bg-gray-50 dark:bg-gray-800">
-                      <div className="text-right text-xs text-gray-500 dark:text-gray-400 h-4 truncate">
+                    <div className="p-2 bg-gray-50 dark:bg-gray-800">
+                      <div className="text-right text-[10px] text-gray-500 dark:text-gray-400 h-3 truncate">
                         {calcExpression || ' '}
                       </div>
-                      <div className="text-right text-2xl font-mono font-bold text-gray-900 dark:text-white truncate">
+                      <div className="text-right text-lg font-mono font-bold text-gray-900 dark:text-white truncate">
                         {calcDisplay}
                       </div>
                       {calcMemory !== 0 && (
@@ -1057,12 +1079,12 @@ function StudentLayout({ children }) {
                     </div>
 
                     {/* Memory & Functions Row */}
-                    <div className="grid grid-cols-5 gap-1 p-2 bg-gray-100 dark:bg-gray-800/50">
+                    <div className="grid grid-cols-5 gap-0.5 p-1.5 bg-gray-100 dark:bg-gray-800/50">
                       {['MC', 'MR', 'M+', 'M-', 'MS'].map(btn => (
                         <button
                           key={btn}
                           onClick={() => handleCalcMemory(btn)}
-                          className="py-1.5 text-[10px] font-semibold rounded bg-gray-200 dark:bg-gray-700 
+                          className="py-1 text-[9px] font-semibold rounded bg-gray-200 dark:bg-gray-700 
                                    text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
                         >
                           {btn}
@@ -1071,12 +1093,12 @@ function StudentLayout({ children }) {
                     </div>
 
                     {/* Scientific Functions */}
-                    <div className="grid grid-cols-5 gap-1 p-2 border-t border-gray-200 dark:border-gray-700">
+                    <div className="grid grid-cols-5 gap-0.5 p-1.5 border-t border-gray-200 dark:border-gray-700">
                       {['sin', 'cos', 'tan', 'log', 'ln'].map(func => (
                         <button
                           key={func}
                           onClick={() => handleCalcFunction(func)}
-                          className="py-2 text-xs font-semibold rounded bg-indigo-100 dark:bg-indigo-900/30 
+                          className="py-1.5 text-[10px] font-semibold rounded bg-indigo-100 dark:bg-indigo-900/30 
                                    text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-800/50"
                         >
                           {func}
@@ -1086,7 +1108,7 @@ function StudentLayout({ children }) {
                         <button
                           key={func}
                           onClick={() => handleCalcFunction(func)}
-                          className="py-2 text-xs font-semibold rounded bg-indigo-100 dark:bg-indigo-900/30 
+                          className="py-1.5 text-[10px] font-semibold rounded bg-indigo-100 dark:bg-indigo-900/30 
                                    text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-800/50"
                         >
                           {func === 'sqrt' ? '√' : func === 'cbrt' ? '∛' : func}
@@ -1096,7 +1118,7 @@ function StudentLayout({ children }) {
                         <button
                           key={func}
                           onClick={() => handleCalcFunction(func)}
-                          className="py-2 text-xs font-semibold rounded bg-indigo-100 dark:bg-indigo-900/30 
+                          className="py-1.5 text-[10px] font-semibold rounded bg-indigo-100 dark:bg-indigo-900/30 
                                    text-indigo-700 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-800/50"
                         >
                           {func}
@@ -1105,40 +1127,40 @@ function StudentLayout({ children }) {
                     </div>
 
                     {/* Power & Special */}
-                    <div className="grid grid-cols-5 gap-1 px-2 pb-1">
-                      <button onClick={() => handleCalcPower(2)} className="py-2 text-xs font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">x²</button>
-                      <button onClick={() => handleCalcPower(3)} className="py-2 text-xs font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">x³</button>
-                      <button onClick={() => handleCalcOperator('^')} className="py-2 text-xs font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">xʸ</button>
-                      <button onClick={() => setCalcDisplay(Math.PI.toString())} className="py-2 text-xs font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">π</button>
-                      <button onClick={() => setCalcDisplay(Math.E.toString())} className="py-2 text-xs font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">e</button>
+                    <div className="grid grid-cols-5 gap-0.5 px-1.5 pb-0.5">
+                      <button onClick={() => handleCalcPower(2)} className="py-1.5 text-[10px] font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">x²</button>
+                      <button onClick={() => handleCalcPower(3)} className="py-1.5 text-[10px] font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">x³</button>
+                      <button onClick={() => handleCalcOperator('^')} className="py-1.5 text-[10px] font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">xʸ</button>
+                      <button onClick={() => setCalcDisplay(Math.PI.toString())} className="py-1.5 text-[10px] font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">π</button>
+                      <button onClick={() => setCalcDisplay(Math.E.toString())} className="py-1.5 text-[10px] font-semibold rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 hover:bg-purple-200">e</button>
                     </div>
 
                     {/* Main Keypad */}
-                    <div className="grid grid-cols-4 gap-1 p-2 border-t border-gray-200 dark:border-gray-700">
-                      <button onClick={handleCalcClear} className="py-3 text-sm font-bold rounded bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200">AC</button>
-                      <button onClick={() => handleCalcFunction('fact')} className="py-3 text-sm font-bold rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300">n!</button>
-                      <button onClick={() => { const num = parseFloat(calcDisplay); setCalcDisplay((1/num).toString()); }} className="py-3 text-sm font-bold rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300">1/x</button>
-                      <button onClick={() => handleCalcOperator('÷')} className="py-3 text-sm font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">÷</button>
+                    <div className="grid grid-cols-4 gap-0.5 p-1.5 border-t border-gray-200 dark:border-gray-700">
+                      <button onClick={handleCalcClear} className="py-2 text-xs font-bold rounded bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200">AC</button>
+                      <button onClick={() => handleCalcFunction('fact')} className="py-2 text-xs font-bold rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300">n!</button>
+                      <button onClick={() => { const num = parseFloat(calcDisplay); setCalcDisplay((1/num).toString()); }} className="py-2 text-xs font-bold rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300">1/x</button>
+                      <button onClick={() => handleCalcOperator('÷')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">÷</button>
                       
                       {['7', '8', '9'].map(num => (
-                        <button key={num} onClick={() => handleCalcInput(num)} className="py-3 text-lg font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
+                        <button key={num} onClick={() => handleCalcInput(num)} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
                       ))}
-                      <button onClick={() => handleCalcOperator('×')} className="py-3 text-sm font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">×</button>
+                      <button onClick={() => handleCalcOperator('×')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">×</button>
                       
                       {['4', '5', '6'].map(num => (
-                        <button key={num} onClick={() => handleCalcInput(num)} className="py-3 text-lg font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
+                        <button key={num} onClick={() => handleCalcInput(num)} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
                       ))}
-                      <button onClick={() => handleCalcOperator('-')} className="py-3 text-sm font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">−</button>
+                      <button onClick={() => handleCalcOperator('-')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">−</button>
                       
                       {['1', '2', '3'].map(num => (
-                        <button key={num} onClick={() => handleCalcInput(num)} className="py-3 text-lg font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
+                        <button key={num} onClick={() => handleCalcInput(num)} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
                       ))}
-                      <button onClick={() => handleCalcOperator('+')} className="py-3 text-sm font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">+</button>
+                      <button onClick={() => handleCalcOperator('+')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">+</button>
                       
-                      <button onClick={() => { const num = parseFloat(calcDisplay); setCalcDisplay((-num).toString()); }} className="py-3 text-lg font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">±</button>
-                      <button onClick={() => handleCalcInput('0')} className="py-3 text-lg font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">0</button>
-                      <button onClick={() => handleCalcInput('.')} className="py-3 text-lg font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">.</button>
-                      <button onClick={handleCalcEquals} className="py-3 text-sm font-bold rounded bg-emerald-500 text-white hover:bg-emerald-600">=</button>
+                      <button onClick={() => { const num = parseFloat(calcDisplay); setCalcDisplay((-num).toString()); }} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">±</button>
+                      <button onClick={() => handleCalcInput('0')} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">0</button>
+                      <button onClick={() => handleCalcInput('.')} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">.</button>
+                      <button onClick={handleCalcEquals} className="py-2 text-xs font-bold rounded bg-emerald-500 text-white hover:bg-emerald-600">=</button>
                     </div>
 
                     {/* History */}
@@ -1367,6 +1389,15 @@ function StudentLayout({ children }) {
                               transition-all duration-300">
                   {user?.name?.charAt(0) || 'S'}
                 </div>
+              </button>
+
+              {/* Mobile Sign Out */}
+              <button
+                onClick={() => { logout(); navigate('/login'); }}
+                className="lg:hidden p-2 rounded-xl text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                title="Sign Out"
+              >
+                <LogOut className="w-5 h-5" />
               </button>
             </div>
           </div>
