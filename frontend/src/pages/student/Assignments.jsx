@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import StudentLayout from '../../components/layout/StudentLayout';
 import Card from '../../components/common/Card';
+import api from '../../services/api';
 import { 
   BookOpen, Plus, Edit2, Trash2, X, Upload, FileText, Image, 
   Play, Pause, RotateCcw, CheckCircle, XCircle, Clock, Target,
@@ -55,11 +56,12 @@ function Assignments() {
   
   // Custom subjects state
   const [customSubjects, setCustomSubjects] = useState(loadCustomSubjects);
+  const [apiSubjects, setApiSubjects] = useState([]);
   const [showCustomInput, setShowCustomInput] = useState(null); // Which modal: 'material', 'flashcard', 'task'
   const [newCustomSubject, setNewCustomSubject] = useState('');
   
-  // Get all subjects (default + custom)
-  const ALL_SUBJECTS = [...DEFAULT_SUBJECTS, ...customSubjects];
+  // Get all subjects (default + custom + API)
+  const ALL_SUBJECTS = [...DEFAULT_SUBJECTS, ...customSubjects, ...apiSubjects.map(s => s.name)];
 
   // Add custom subject
   const addCustomSubject = (formType, setForm, form) => {
@@ -81,7 +83,8 @@ function Assignments() {
   const fileInputRef = useRef(null);
 
   // Flashcards State
-  const [flashcards, setFlashcards] = useState(() => loadFromStorage(STORAGE_KEYS.flashcards, []));
+  const [flashcards, setFlashcards] = useState([]);
+  const [flashcardsLoading, setFlashcardsLoading] = useState(true);
   const [showFlashcardModal, setShowFlashcardModal] = useState(false);
   const [flashcardForm, setFlashcardForm] = useState({ question: '', answer: '', subject: '' });
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -148,9 +151,34 @@ function Assignments() {
     return () => clearInterval(interval);
   }, [isTimerRunning, timerMinutes, timerSeconds, timerMode]);
 
+  // Fetch flashcards from API
+  useEffect(() => {
+    const fetchFlashcards = async () => {
+      try {
+        setFlashcardsLoading(true);
+        const response = await api.get('/flashcards');
+        setFlashcards(response.data.data.flashcards || []);
+      } catch (error) {
+        console.error('Error fetching flashcards:', error);
+        toast.error('Failed to load flashcards');
+      } finally {
+        setFlashcardsLoading(false);
+      }
+    };
+    const fetchSubjects = async () => {
+      try {
+        const response = await api.get('/subjects');
+        setApiSubjects(response.data.data || []);
+      } catch (error) {
+        console.error('Error fetching subjects:', error);
+      }
+    };
+    fetchFlashcards();
+    fetchSubjects();
+  }, []);
+
   // Save data when it changes
   useEffect(() => { saveToStorage(STORAGE_KEYS.materials, materials); }, [materials]);
-  useEffect(() => { saveToStorage(STORAGE_KEYS.flashcards, flashcards); }, [flashcards]);
   useEffect(() => { saveToStorage(STORAGE_KEYS.quizResults, quizResults); }, [quizResults]);
   useEffect(() => { saveToStorage(STORAGE_KEYS.tasks, tasks); }, [tasks]);
 
@@ -205,25 +233,49 @@ function Assignments() {
   };
 
   // ==================== FLASHCARDS ====================
-  const saveFlashcard = () => {
+  const saveFlashcard = async () => {
     if (!flashcardForm.question || !flashcardForm.answer) {
       toast.error('Please fill question and answer');
       return;
     }
-    const newCard = {
-      _id: Date.now().toString(),
-      ...flashcardForm,
-      createdAt: new Date().toISOString()
-    };
-    setFlashcards([...flashcards, newCard]);
-    setShowFlashcardModal(false);
-    setFlashcardForm({ question: '', answer: '', subject: '' });
-    toast.success('Flashcard created!');
+    
+    try {
+      // Find the subject ID from apiSubjects
+      const subjectObj = apiSubjects.find(s => s.name === flashcardForm.subject);
+      const subjectId = subjectObj?._id || apiSubjects[0]?._id;
+      
+      if (!subjectId) {
+        toast.error('Please select a valid subject');
+        return;
+      }
+      
+      const response = await api.post('/flashcards', {
+        question: flashcardForm.question,
+        answer: flashcardForm.answer,
+        subject: subjectId,
+        difficulty: 'medium',
+        deck: 'General'
+      });
+      
+      setFlashcards([response.data.data.flashcard, ...flashcards]);
+      setShowFlashcardModal(false);
+      setFlashcardForm({ question: '', answer: '', subject: '' });
+      toast.success('Flashcard created!');
+    } catch (error) {
+      console.error('Error creating flashcard:', error);
+      toast.error(error.response?.data?.message || 'Failed to create flashcard');
+    }
   };
 
-  const deleteFlashcard = (id) => {
-    setFlashcards(flashcards.filter(f => f._id !== id));
-    toast.success('Flashcard deleted');
+  const deleteFlashcard = async (id) => {
+    try {
+      await api.delete(`/flashcards/${id}`);
+      setFlashcards(flashcards.filter(f => f._id !== id));
+      toast.success('Flashcard deleted');
+    } catch (error) {
+      console.error('Error deleting flashcard:', error);
+      toast.error('Failed to delete flashcard');
+    }
   };
 
   const startStudyMode = () => {
@@ -640,7 +692,13 @@ function Assignments() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {flashcards.map((card, idx) => (
+              {flashcardsLoading ? (
+                <div className="col-span-full text-center py-12">
+                  <div className="animate-spin w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-3"></div>
+                  <p className="text-gray-500">Loading flashcards...</p>
+                </div>
+              ) : (
+                flashcards.map((card, idx) => (
                 <div 
                   key={card._id} 
                   className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in"
@@ -650,7 +708,7 @@ function Assignments() {
                   <div className="p-4 space-y-3">
                     <div className="flex justify-between items-start">
                       <span className="px-3 py-1 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
-                        {card.subject || 'General'}
+                        {card.subjectName || card.subject?.name || 'General'}
                       </span>
                       <button
                         onClick={() => deleteFlashcard(card._id)}
@@ -671,10 +729,11 @@ function Assignments() {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+              )}
             </div>
 
-            {flashcards.length === 0 && (
+            {flashcards.length === 0 && !flashcardsLoading && (
               <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700">
                 <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-100 to-violet-100 dark:from-purple-900/30 dark:to-violet-900/30 flex items-center justify-center">
                   <Layers className="w-10 h-10 text-purple-500" />
