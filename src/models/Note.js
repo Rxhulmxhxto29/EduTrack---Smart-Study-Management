@@ -182,14 +182,14 @@ const noteSchema = new mongoose.Schema({
   aiTags: [{
     type: String,
     enum: [
-      'Exam Important',
-      'High Weightage',
-      'Quick Revision',
-      'Must Read',
-      'Formula Heavy',
-      'Definition Rich',
-      'PYQ Frequent',
-      'Low Priority'
+      'high-value',
+      'exam-important',
+      'formula-heavy',
+      'definition-rich',
+      'pyq-relevant',
+      'needs-review',
+      'well-structured',
+      'quick-revision'
     ]
   }],
   aiKeywords: [{
