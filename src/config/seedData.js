@@ -309,7 +309,7 @@ A Binary Search Tree is a node-based binary tree data structure with the followi
         section: 'A',
         viewCount: 42,
         aiScore: { quality: 88, completeness: 82, examRelevance: 95, overall: 88 },
-        aiTags: ['Exam Important', 'Must Read', 'Formula Heavy'],
+        aiTags: ['exam-important', 'high-value', 'formula-heavy'],
         aiKeywords: [
           { word: 'BST', importance: 'critical' },
           { word: 'binary search tree', importance: 'critical' },
@@ -372,7 +372,7 @@ LEFT JOIN grades g ON s.id = g.student_id;
         semester: 5,
         viewCount: 35,
         aiScore: { quality: 85, completeness: 78, examRelevance: 92, overall: 85 },
-        aiTags: ['Exam Important', 'High Weightage', 'Definition Rich'],
+        aiTags: ['exam-important', 'high-value', 'definition-rich'],
         aiKeywords: [
           { word: 'SQL joins', importance: 'critical' },
           { word: 'INNER JOIN', importance: 'critical' },
@@ -435,7 +435,7 @@ LEFT JOIN grades g ON s.id = g.student_id;
         semester: 5,
         viewCount: 58,
         aiScore: { quality: 92, completeness: 90, examRelevance: 98, overall: 93 },
-        aiTags: ['Exam Important', 'Must Read', 'High Weightage'],
+        aiTags: ['exam-important', 'high-value', 'pyq-relevant'],
         aiKeywords: [
           { word: 'normalization', importance: 'critical' },
           { word: '1NF 2NF 3NF', importance: 'critical' },
@@ -502,7 +502,7 @@ LEFT JOIN grades g ON s.id = g.student_id;
         semester: 5,
         viewCount: 67,
         aiScore: { quality: 90, completeness: 88, examRelevance: 96, overall: 91 },
-        aiTags: ['Exam Important', 'Must Read', 'Formula Heavy', 'PYQ Frequent'],
+        aiTags: ['exam-important', 'high-value', 'formula-heavy', 'pyq-relevant'],
         aiKeywords: [
           { word: 'scheduling', importance: 'critical' },
           { word: 'FCFS', importance: 'critical' },
@@ -557,7 +557,7 @@ Page Fault Rate = Number of Page Faults / Total References`,
         semester: 5,
         viewCount: 29,
         aiScore: { quality: 82, completeness: 75, examRelevance: 90, overall: 82 },
-        aiTags: ['Exam Important', 'Quick Revision'],
+        aiTags: ['exam-important', 'quick-revision'],
         aiKeywords: [
           { word: 'page replacement', importance: 'critical' },
           { word: 'FIFO', importance: 'critical' },
@@ -613,7 +613,7 @@ Find shortest path from a source vertex to all other vertices in a weighted grap
         semester: 5,
         viewCount: 52,
         aiScore: { quality: 86, completeness: 80, examRelevance: 94, overall: 87 },
-        aiTags: ['Exam Important', 'Must Read', 'PYQ Frequent'],
+        aiTags: ['exam-important', 'high-value', 'pyq-relevant'],
         aiKeywords: [
           { word: 'Dijkstra', importance: 'critical' },
           { word: 'shortest path', importance: 'critical' },
@@ -673,7 +673,7 @@ Find shortest path from a source vertex to all other vertices in a weighted grap
         semester: 5,
         viewCount: 38,
         aiScore: { quality: 84, completeness: 80, examRelevance: 88, overall: 84 },
-        aiTags: ['Exam Important', 'Quick Revision'],
+        aiTags: ['exam-important', 'quick-revision'],
         aiAnalyzedAt: new Date()
       },
       {
@@ -714,7 +714,7 @@ Find shortest path from a source vertex to all other vertices in a weighted grap
         semester: 5,
         viewCount: 44,
         aiScore: { quality: 80, completeness: 76, examRelevance: 91, overall: 82 },
-        aiTags: ['Exam Important', 'Definition Rich'],
+        aiTags: ['exam-important', 'definition-rich'],
         aiAnalyzedAt: new Date()
       },
       {
@@ -750,7 +750,7 @@ Find shortest path from a source vertex to all other vertices in a weighted grap
         semester: 5,
         viewCount: 15,
         aiScore: { quality: 72, completeness: 60, examRelevance: 65, overall: 66 },
-        aiTags: ['Quick Revision', 'Low Priority'],
+        aiTags: ['quick-revision', 'needs-review'],
         aiAnalyzedAt: new Date()
       },
       {
@@ -799,7 +799,7 @@ Cables, Hubs, Bits transmission
         semester: 5,
         viewCount: 55,
         aiScore: { quality: 78, completeness: 85, examRelevance: 90, overall: 84 },
-        aiTags: ['Exam Important', 'Definition Rich', 'Quick Revision'],
+        aiTags: ['exam-important', 'definition-rich', 'quick-revision'],
         aiAnalyzedAt: new Date()
       }
     ]);
