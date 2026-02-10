@@ -44,7 +44,7 @@ EduTrack is a modern, full-stack web application that revolutionizes how student
 - **Create & Organize**: Rich text notes with subject and unit categorization
 - **AI Smart Search**: Natural language search with intelligent suggestions
 - **Favorites & Bookmarks**: Quick access to important notes
-- **File Attachments**: Support for PDFs, images, and documents via Cloudinary
+- **File Attachments**: Support for PDFs, images, and documents (optional - requires Cloudinary setup)
 - **Duplicate Detection**: Automatic detection of similar content
 
 ### 📋 Assignment Tracking
@@ -144,7 +144,7 @@ Distraction-free study environment with timer and focused note access.
 | Mongoose | ODM |
 | JWT | Authentication |
 | Bcrypt | Password Hashing |
-| Cloudinary | File Storage |
+| Cloudinary | File Storage (Optional) |
 | mongodb-memory-server | In-Memory DB (Dev) |
 
 ---
@@ -184,12 +184,16 @@ Distraction-free study environment with timer and focused note access.
    NODE_ENV=development
    JWT_SECRET=your_jwt_secret_key_here
    MONGODB_URI=mongodb://localhost:27017/edutrack
-   CLOUDINARY_CLOUD_NAME=your_cloud_name
-   CLOUDINARY_API_KEY=your_api_key
-   CLOUDINARY_API_SECRET=your_api_secret
+   
+   # OPTIONAL: Only needed for file upload features (PDF/image attachments)
+   # CLOUDINARY_CLOUD_NAME=your_cloud_name
+   # CLOUDINARY_API_KEY=your_api_key
+   # CLOUDINARY_API_SECRET=your_api_secret
    ```
    
    > **Note**: The app uses in-memory MongoDB by default for development. No database setup required!
+   > 
+   > **Note**: Cloudinary is optional and only needed for file uploads. All other features work without it!
 
 5. **Start the Backend Server**
    ```bash
@@ -360,7 +364,7 @@ Content-Type: application/json
 | `NODE_ENV` | Environment mode | development |
 | `JWT_SECRET` | JWT signing secret | - |
 | `MONGODB_URI` | MongoDB connection string | In-memory |
-| `CLOUDINARY_*` | Cloudinary credentials | - |
+| `CLOUDINARY_*` | Cloudinary credentials (Optional) | - |
 
 ### Frontend Configuration
 
@@ -404,7 +408,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [TailwindCSS](https://tailwindcss.com/) - Styling
 - [Lucide Icons](https://lucide.dev/) - Beautiful Icons
 - [MongoDB](https://www.mongodb.com/) - Database
-- [Cloudinary](https://cloudinary.com/) - Media Storage
+- [Cloudinary](https://cloudinary.com/) - Media Storage (Optional)
 
 ---
 
