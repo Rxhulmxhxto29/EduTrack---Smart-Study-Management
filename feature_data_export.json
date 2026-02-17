@@ -1,0 +1,1760 @@
+{
+  "timestamp": "2026-02-17T19:18:22.947Z",
+  "systemHealth": {
+    "status": "OK",
+    "message": "EduTrack Backend is running",
+    "timestamp": "2026-02-17T19:18:23.032Z"
+  },
+  "users": {
+    "student": {
+      "_id": "6994bef5f4baf97152281c2c",
+      "name": "Rahul Mahato",
+      "email": "student@edutrack.com",
+      "role": "student",
+      "branch": "CSE",
+      "semester": 5,
+      "section": "A",
+      "enrollmentNumber": "CSE2023001",
+      "avatar": null,
+      "isActive": true,
+      "lastLogin": null,
+      "createdAt": "2026-02-17T19:18:13.142Z",
+      "updatedAt": "2026-02-17T19:18:13.142Z",
+      "__v": 0
+    },
+    "teacher": {
+      "_id": "6994bef5f4baf97152281c38",
+      "name": "Prof. Teacher",
+      "email": "teacher@edutrack.com",
+      "role": "teacher",
+      "avatar": null,
+      "isActive": true,
+      "lastLogin": null,
+      "createdAt": "2026-02-17T19:18:13.512Z",
+      "updatedAt": "2026-02-17T19:18:13.512Z",
+      "__v": 0
+    },
+    "admin": {
+      "_id": "6994bef5f4baf97152281c4e",
+      "name": "System Admin",
+      "email": "admin@edutrack.com",
+      "role": "admin",
+      "avatar": null,
+      "isActive": true,
+      "lastLogin": null,
+      "createdAt": "2026-02-17T19:18:13.772Z",
+      "updatedAt": "2026-02-17T19:18:13.772Z",
+      "__v": 0
+    }
+  },
+  "features": {
+    "student_timetable": {
+      "timetable": {}
+    },
+    "student_assignments": {
+      "assignments": [
+        {
+          "_id": "6994bef6f4baf97152281ce0",
+          "title": "Normalize a Database Schema",
+          "description": "Given the following unnormalized relation, decompose it into 1NF, 2NF, 3NF, and BCNF:\n\nSTUDENT_COURSE(StudentID, StudentName, CourseID, CourseName, InstructorID, InstructorName, Grade, Department)\n\nShow all functional dependencies and explain each step of decomposition.",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c57",
+            "name": "Database Management Systems",
+            "code": "CS302",
+            "id": "6994bef6f4baf97152281c57"
+          },
+          "unit": "6994bef6f4baf97152281c91",
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [],
+          "assignedDate": "2026-02-03T19:18:14.193Z",
+          "dueDate": "2026-02-15T19:18:14.193Z",
+          "maxMarks": 15,
+          "allowLateSubmission": false,
+          "lateSubmissionPenalty": 0,
+          "isActive": true,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.210Z",
+          "updatedAt": "2026-02-17T19:18:14.210Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281cdc",
+          "title": "Implement Binary Search Tree",
+          "description": "Write a program to implement BST with insert, delete, search, and inorder traversal operations. Include time complexity analysis for each operation. Submit the code along with a brief report (max 2 pages) explaining your approach and test cases.",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": "6994bef6f4baf97152281c6e",
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [
+            "A",
+            "B"
+          ],
+          "assignedDate": "2026-02-10T19:18:14.193Z",
+          "dueDate": "2026-02-22T19:18:14.193Z",
+          "maxMarks": 25,
+          "allowLateSubmission": false,
+          "lateSubmissionPenalty": 0,
+          "isActive": true,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.201Z",
+          "updatedAt": "2026-02-17T19:18:14.201Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281cdf",
+          "title": "OS Process Scheduling Simulation",
+          "description": "Simulate FCFS, SJF, Priority, and Round Robin scheduling algorithms. Given a set of processes with arrival and burst times, calculate and display:\n- Gantt Chart\n- Average Waiting Time\n- Average Turnaround Time\n\nUse any programming language. Submit source code and output screenshots.",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c58",
+            "name": "Operating Systems",
+            "code": "CS303",
+            "id": "6994bef6f4baf97152281c58"
+          },
+          "unit": "6994bef6f4baf97152281ca0",
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [],
+          "assignedDate": "2026-02-12T19:18:14.193Z",
+          "dueDate": "2026-02-24T19:18:14.193Z",
+          "maxMarks": 30,
+          "allowLateSubmission": false,
+          "lateSubmissionPenalty": 0,
+          "isActive": true,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.206Z",
+          "updatedAt": "2026-02-17T19:18:14.206Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281cde",
+          "title": "SQL Queries - Practice Set",
+          "description": "Solve the following SQL problems:\n1. Write a query to find the 2nd highest salary\n2. Find employees with duplicate emails\n3. Write a query using all types of joins\n4. Create a view for department-wise salary summary\n5. Write a stored procedure for employee report\n\nSubmit your .sql file with all queries and sample outputs.",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c57",
+            "name": "Database Management Systems",
+            "code": "CS302",
+            "id": "6994bef6f4baf97152281c57"
+          },
+          "unit": "6994bef6f4baf97152281c8c",
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [],
+          "assignedDate": "2026-02-14T19:18:14.193Z",
+          "dueDate": "2026-02-27T19:18:14.193Z",
+          "maxMarks": 20,
+          "allowLateSubmission": false,
+          "lateSubmissionPenalty": 0,
+          "isActive": true,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.205Z",
+          "updatedAt": "2026-02-17T19:18:14.205Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281ce2",
+          "title": "Build a REST API with Node.js",
+          "description": "Create a RESTful API for a simple todo application using Node.js and Express. Requirements:\n- CRUD operations for todos\n- Input validation\n- Error handling\n- Use MongoDB or any database\n- Write at least 5 API endpoints\n\nSubmit GitHub repository link.",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c5a",
+            "name": "Web Development",
+            "code": "CS305",
+            "id": "6994bef6f4baf97152281c5a"
+          },
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [],
+          "assignedDate": "2026-02-15T19:18:14.193Z",
+          "dueDate": "2026-03-03T19:18:14.193Z",
+          "maxMarks": 40,
+          "allowLateSubmission": false,
+          "lateSubmissionPenalty": 0,
+          "isActive": true,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.212Z",
+          "updatedAt": "2026-02-17T19:18:14.212Z",
+          "__v": 0
+        }
+      ],
+      "pagination": {
+        "total": 5,
+        "page": 1,
+        "limit": 10,
+        "totalPages": 1,
+        "hasNextPage": false,
+        "hasPrevPage": false
+      }
+    },
+    "student_progress": {
+      "progress": [
+        {
+          "_id": "6994bef6f4baf97152281d14",
+          "user": "6994bef5f4baf97152281c2c",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c63",
+            "unitNumber": 1,
+            "name": "Arrays & Linked Lists"
+          },
+          "topicProgress": [
+            {
+              "topicName": "Array Operations & Complexity",
+              "status": "completed",
+              "completedAt": "2026-01-28T19:18:14.193Z",
+              "confidenceLevel": 5,
+              "lastStudied": "2026-02-15T19:18:14.193Z",
+              "_id": "6994bef6f4baf97152281d15",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Singly Linked List",
+              "status": "completed",
+              "completedAt": "2026-01-30T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "lastStudied": "2026-02-12T19:18:14.193Z",
+              "_id": "6994bef6f4baf97152281d16",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Doubly Linked List",
+              "status": "completed",
+              "completedAt": "2026-02-02T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d17",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Circular Linked List",
+              "status": "completed",
+              "completedAt": "2026-02-03T19:18:14.193Z",
+              "confidenceLevel": 3,
+              "_id": "6994bef6f4baf97152281d18",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Dynamic Arrays & Amortized Analysis",
+              "status": "completed",
+              "completedAt": "2026-02-05T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d19",
+              "notesViewed": []
+            }
+          ],
+          "unitStatus": "completed",
+          "completionPercentage": 100,
+          "totalTimeSpent": 480,
+          "readyForExam": true,
+          "revisionCount": 2,
+          "lastRevisedAt": "2026-02-15T19:18:14.193Z",
+          "createdAt": "2026-02-17T19:18:14.321Z",
+          "updatedAt": "2026-02-17T19:18:14.321Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281d1a",
+          "user": "6994bef5f4baf97152281c2c",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c69",
+            "unitNumber": 2,
+            "name": "Stacks & Queues"
+          },
+          "topicProgress": [
+            {
+              "topicName": "Stack Implementation & Applications",
+              "status": "completed",
+              "completedAt": "2026-02-07T19:18:14.193Z",
+              "confidenceLevel": 5,
+              "_id": "6994bef6f4baf97152281d1b",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Infix to Postfix Conversion",
+              "status": "completed",
+              "completedAt": "2026-02-08T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d1c",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Queue Types - Linear, Circular, Priority",
+              "status": "completed",
+              "completedAt": "2026-02-10T19:18:14.193Z",
+              "confidenceLevel": 3,
+              "_id": "6994bef6f4baf97152281d1d",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Deque (Double-ended Queue)",
+              "status": "in-progress",
+              "confidenceLevel": 2,
+              "_id": "6994bef6f4baf97152281d1e",
+              "notesViewed": []
+            }
+          ],
+          "unitStatus": "in-progress",
+          "completionPercentage": 75,
+          "totalTimeSpent": 320,
+          "readyForExam": false,
+          "revisionCount": 1,
+          "createdAt": "2026-02-17T19:18:14.327Z",
+          "updatedAt": "2026-02-17T19:18:14.327Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281d1f",
+          "user": "6994bef5f4baf97152281c2c",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c6e",
+            "unitNumber": 3,
+            "name": "Trees & Binary Search Trees"
+          },
+          "topicProgress": [
+            {
+              "topicName": "Binary Tree Traversals",
+              "status": "completed",
+              "completedAt": "2026-02-12T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d20",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Binary Search Tree Operations",
+              "status": "in-progress",
+              "confidenceLevel": 3,
+              "_id": "6994bef6f4baf97152281d21",
+              "notesViewed": []
+            },
+            {
+              "topicName": "AVL Trees & Rotations",
+              "status": "in-progress",
+              "confidenceLevel": 2,
+              "_id": "6994bef6f4baf97152281d22",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Heap & Priority Queue",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d23",
+              "notesViewed": []
+            },
+            {
+              "topicName": "B-Trees & B+ Trees",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d24",
+              "notesViewed": []
+            }
+          ],
+          "unitStatus": "in-progress",
+          "completionPercentage": 20,
+          "totalTimeSpent": 180,
+          "readyForExam": false,
+          "revisionCount": 0,
+          "createdAt": "2026-02-17T19:18:14.335Z",
+          "updatedAt": "2026-02-17T19:18:14.335Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281d25",
+          "user": "6994bef5f4baf97152281c2c",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c74",
+            "unitNumber": 4,
+            "name": "Graphs & Graph Algorithms"
+          },
+          "topicProgress": [
+            {
+              "topicName": "Graph Representations",
+              "status": "completed",
+              "completedAt": "2026-02-14T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d26",
+              "notesViewed": []
+            },
+            {
+              "topicName": "BFS & DFS",
+              "status": "in-progress",
+              "confidenceLevel": 2,
+              "_id": "6994bef6f4baf97152281d27",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Dijkstra's Algorithm",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d28",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Kruskal's & Prim's MST",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d29",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Topological Sorting",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d2a",
+              "notesViewed": []
+            }
+          ],
+          "unitStatus": "in-progress",
+          "completionPercentage": 20,
+          "totalTimeSpent": 90,
+          "readyForExam": false,
+          "revisionCount": 0,
+          "createdAt": "2026-02-17T19:18:14.346Z",
+          "updatedAt": "2026-02-17T19:18:14.346Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281d2b",
+          "user": "6994bef5f4baf97152281c2c",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c57",
+            "name": "Database Management Systems",
+            "code": "CS302",
+            "id": "6994bef6f4baf97152281c57"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c87",
+            "unitNumber": 1,
+            "name": "Introduction to DBMS"
+          },
+          "topicProgress": [
+            {
+              "topicName": "Database System Architecture",
+              "status": "completed",
+              "completedAt": "2026-01-23T19:18:14.193Z",
+              "confidenceLevel": 5,
+              "_id": "6994bef6f4baf97152281d2c",
+              "notesViewed": []
+            },
+            {
+              "topicName": "ER Model & ER Diagrams",
+              "status": "completed",
+              "completedAt": "2026-01-26T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d2d",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Relational Model",
+              "status": "completed",
+              "completedAt": "2026-01-28T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d2e",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Data Independence",
+              "status": "completed",
+              "completedAt": "2026-01-29T19:18:14.193Z",
+              "confidenceLevel": 3,
+              "_id": "6994bef6f4baf97152281d2f",
+              "notesViewed": []
+            }
+          ],
+          "unitStatus": "completed",
+          "completionPercentage": 100,
+          "totalTimeSpent": 360,
+          "readyForExam": true,
+          "revisionCount": 3,
+          "lastRevisedAt": "2026-02-16T19:18:14.193Z",
+          "createdAt": "2026-02-17T19:18:14.352Z",
+          "updatedAt": "2026-02-17T19:18:14.352Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281d30",
+          "user": "6994bef5f4baf97152281c2c",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c57",
+            "name": "Database Management Systems",
+            "code": "CS302",
+            "id": "6994bef6f4baf97152281c57"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c8c",
+            "unitNumber": 2,
+            "name": "SQL & Relational Algebra"
+          },
+          "topicProgress": [
+            {
+              "topicName": "SQL DDL & DML Commands",
+              "status": "completed",
+              "completedAt": "2026-02-02T19:18:14.193Z",
+              "confidenceLevel": 5,
+              "_id": "6994bef6f4baf97152281d31",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Joins & Subqueries",
+              "status": "completed",
+              "completedAt": "2026-02-05T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d32",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Relational Algebra Operations",
+              "status": "in-progress",
+              "confidenceLevel": 3,
+              "_id": "6994bef6f4baf97152281d33",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Views & Indexes",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d34",
+              "notesViewed": []
+            }
+          ],
+          "unitStatus": "in-progress",
+          "completionPercentage": 50,
+          "totalTimeSpent": 280,
+          "readyForExam": false,
+          "revisionCount": 0,
+          "createdAt": "2026-02-17T19:18:14.356Z",
+          "updatedAt": "2026-02-17T19:18:14.356Z",
+          "__v": 0
+        },
+        {
+          "_id": "6994bef6f4baf97152281d35",
+          "user": "6994bef5f4baf97152281c2c",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c58",
+            "name": "Operating Systems",
+            "code": "CS303",
+            "id": "6994bef6f4baf97152281c58"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281ca0",
+            "unitNumber": 1,
+            "name": "Process Management"
+          },
+          "topicProgress": [
+            {
+              "topicName": "Process States & PCB",
+              "status": "completed",
+              "completedAt": "2026-02-09T19:18:14.193Z",
+              "confidenceLevel": 4,
+              "_id": "6994bef6f4baf97152281d36",
+              "notesViewed": []
+            },
+            {
+              "topicName": "CPU Scheduling Algorithms",
+              "status": "in-progress",
+              "confidenceLevel": 3,
+              "_id": "6994bef6f4baf97152281d37",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Process Synchronization",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d38",
+              "notesViewed": []
+            },
+            {
+              "topicName": "Deadlocks",
+              "status": "not-started",
+              "confidenceLevel": 1,
+              "_id": "6994bef6f4baf97152281d39",
+              "notesViewed": []
+            }
+          ],
+          "unitStatus": "in-progress",
+          "completionPercentage": 25,
+          "totalTimeSpent": 150,
+          "readyForExam": false,
+          "revisionCount": 0,
+          "createdAt": "2026-02-17T19:18:14.358Z",
+          "updatedAt": "2026-02-17T19:18:14.358Z",
+          "__v": 0
+        }
+      ]
+    },
+    "student_flashcards": "Flashcards retrieved successfully",
+    "teacher_subjects": {
+      "subjects": [
+        {
+          "_id": "6994bef6f4baf97152281c56",
+          "name": "Data Structures & Algorithms",
+          "code": "CS301",
+          "branch": "CSE",
+          "semester": 5,
+          "credits": 4,
+          "description": "Fundamental data structures and algorithm design techniques including arrays, linked lists, trees, graphs, sorting, and searching algorithms.",
+          "syllabusVersion": "1.0",
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "isActive": true,
+          "createdAt": "2026-02-17T19:18:14.004Z",
+          "updatedAt": "2026-02-17T19:18:14.004Z",
+          "__v": 0,
+          "id": "6994bef6f4baf97152281c56"
+        },
+        {
+          "_id": "6994bef6f4baf97152281c57",
+          "name": "Database Management Systems",
+          "code": "CS302",
+          "branch": "CSE",
+          "semester": 5,
+          "credits": 4,
+          "description": "Introduction to database concepts, ER modeling, relational algebra, SQL, normalization, transaction processing, and NoSQL databases.",
+          "syllabusVersion": "1.0",
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "isActive": true,
+          "createdAt": "2026-02-17T19:18:14.005Z",
+          "updatedAt": "2026-02-17T19:18:14.005Z",
+          "__v": 0,
+          "id": "6994bef6f4baf97152281c57"
+        },
+        {
+          "_id": "6994bef6f4baf97152281c58",
+          "name": "Operating Systems",
+          "code": "CS303",
+          "branch": "CSE",
+          "semester": 5,
+          "credits": 3,
+          "description": "Process management, memory management, file systems, I/O management, and distributed operating systems.",
+          "syllabusVersion": "1.0",
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "isActive": true,
+          "createdAt": "2026-02-17T19:18:14.006Z",
+          "updatedAt": "2026-02-17T19:18:14.006Z",
+          "__v": 0,
+          "id": "6994bef6f4baf97152281c58"
+        },
+        {
+          "_id": "6994bef6f4baf97152281c59",
+          "name": "Computer Networks",
+          "code": "CS304",
+          "branch": "CSE",
+          "semester": 5,
+          "credits": 3,
+          "description": "OSI model, TCP/IP, routing algorithms, network security, wireless networks, and application layer protocols.",
+          "syllabusVersion": "1.0",
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "isActive": true,
+          "createdAt": "2026-02-17T19:18:14.007Z",
+          "updatedAt": "2026-02-17T19:18:14.007Z",
+          "__v": 0,
+          "id": "6994bef6f4baf97152281c59"
+        },
+        {
+          "_id": "6994bef6f4baf97152281c5a",
+          "name": "Web Development",
+          "code": "CS305",
+          "branch": "CSE",
+          "semester": 5,
+          "credits": 3,
+          "description": "HTML, CSS, JavaScript, React, Node.js, REST APIs, and full-stack web application development.",
+          "syllabusVersion": "1.0",
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "isActive": true,
+          "createdAt": "2026-02-17T19:18:14.017Z",
+          "updatedAt": "2026-02-17T19:18:14.017Z",
+          "__v": 0,
+          "id": "6994bef6f4baf97152281c5a"
+        },
+        {
+          "_id": "6994bef6f4baf97152281c5b",
+          "name": "Discrete Mathematics",
+          "code": "MA301",
+          "branch": "CSE",
+          "semester": 5,
+          "credits": 3,
+          "description": "Logic, sets, relations, functions, graph theory, combinatorics, and algebraic structures.",
+          "syllabusVersion": "1.0",
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato"
+          },
+          "isActive": true,
+          "createdAt": "2026-02-17T19:18:14.018Z",
+          "updatedAt": "2026-02-17T19:18:14.018Z",
+          "__v": 0,
+          "id": "6994bef6f4baf97152281c5b"
+        }
+      ],
+      "pagination": {
+        "total": 6,
+        "page": 1,
+        "limit": 10,
+        "totalPages": 1,
+        "hasNextPage": false,
+        "hasPrevPage": false
+      }
+    },
+    "teacher_notes": {
+      "notes": [
+        {
+          "aiScore": {
+            "quality": 78,
+            "completeness": 85,
+            "examRelevance": 90,
+            "overall": 84
+          },
+          "aiSummary": {
+            "bulletPoints": [],
+            "keyPoints": []
+          },
+          "_id": "6994bef6f4baf97152281cd0",
+          "title": "OSI Model - 7 Layers",
+          "description": "Complete OSI model reference with protocols at each layer.",
+          "content": "# OSI Model\n\n## Layer 7 - Application\nHTTP, FTP, SMTP, DNS, SNMP\n\n## Layer 6 - Presentation\nSSL/TLS, JPEG, ASCII, Encryption\n\n## Layer 5 - Session\nNetBIOS, RPC, Session management\n\n## Layer 4 - Transport\nTCP, UDP, Port numbers\n\n## Layer 3 - Network\nIP, ICMP, Routers, Logical addressing\n\n## Layer 2 - Data Link\nEthernet, MAC address, Switches, Frames\n\n## Layer 1 - Physical\nCables, Hubs, Bits transmission\n\n## Mnemonic: \"All People Seem To Need Data Processing\"\n\n## TCP vs UDP\n| Feature | TCP | UDP |\n|---------|-----|-----|\n| Connection | Connection-oriented | Connectionless |\n| Reliability | Reliable | Unreliable |\n| Speed | Slower | Faster |\n| Use case | Web, Email | Streaming, DNS |",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c59",
+            "name": "Computer Networks",
+            "code": "CS304",
+            "id": "6994bef6f4baf97152281c59"
+          },
+          "rating": 4,
+          "tags": [
+            "important",
+            "exam-focused"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": false,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 55,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "definition-rich",
+            "quick-revision"
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "aiKeywords": [],
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.145Z",
+          "updatedAt": "2026-02-17T19:18:14.145Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 72,
+            "completeness": 60,
+            "examRelevance": 65,
+            "overall": 66
+          },
+          "aiSummary": {
+            "bulletPoints": [],
+            "keyPoints": []
+          },
+          "_id": "6994bef6f4baf97152281ccf",
+          "title": "React Hooks - useState & useEffect",
+          "description": "Quick reference for React hooks with patterns and best practices.",
+          "content": "# React Hooks\n\n## useState\n- Manages component state\n- Returns [state, setState] pair\n- Can hold any type of value\n\n## useEffect\n- Side effects in function components\n- Replaces componentDidMount, componentDidUpdate, componentWillUnmount\n- Cleanup function for subscriptions\n\n## Rules of Hooks\n1. Only call at top level\n2. Only call from React functions\n3. Consistent call order every render\n\n## Common Patterns\n- Fetching data in useEffect\n- Debouncing with useEffect + cleanup\n- Derived state vs computed values",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c5a",
+            "name": "Web Development",
+            "code": "CS305",
+            "id": "6994bef6f4baf97152281c5a"
+          },
+          "rating": 3,
+          "tags": [
+            "revision",
+            "homework"
+          ],
+          "isImportant": false,
+          "isExamFocused": false,
+          "hasFormulas": false,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 15,
+          "downloadCount": 0,
+          "aiTags": [
+            "quick-revision",
+            "needs-review"
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "aiKeywords": [],
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.143Z",
+          "updatedAt": "2026-02-17T19:18:14.143Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 80,
+            "completeness": 76,
+            "examRelevance": 91,
+            "overall": 82
+          },
+          "aiSummary": {
+            "bulletPoints": [],
+            "keyPoints": []
+          },
+          "_id": "6994bef6f4baf97152281cce",
+          "title": "ACID Properties in DBMS",
+          "description": "Detailed explanation of ACID properties with real-world examples.",
+          "content": "# ACID Properties\n\n## Atomicity\n- \"All or nothing\" - transaction is either fully completed or fully rolled back\n- Example: Bank transfer - debit and credit must both succeed\n\n## Consistency\n- Database must remain in a consistent state before and after transaction\n- All integrity constraints must be maintained\n\n## Isolation\n- Concurrent transactions should not interfere with each other\n- Isolation levels: Read Uncommitted, Read Committed, Repeatable Read, Serializable\n\n## Durability\n- Once a transaction is committed, changes are permanent\n- Survives system crashes (WAL - Write Ahead Logging)\n\n## Important for Exams\n- Draw state diagrams for each property\n- Give real-world examples\n- Know isolation levels and their problems (dirty read, phantom read, etc.)",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c57",
+            "name": "Database Management Systems",
+            "code": "CS302",
+            "id": "6994bef6f4baf97152281c57"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c96",
+            "unitNumber": 4,
+            "name": "Transaction Management"
+          },
+          "topic": "ACID Properties",
+          "rating": 4,
+          "tags": [
+            "important",
+            "exam-focused"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": false,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 44,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "definition-rich"
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "aiKeywords": [],
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.141Z",
+          "updatedAt": "2026-02-17T19:18:14.141Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 84,
+            "completeness": 80,
+            "examRelevance": 88,
+            "overall": 84
+          },
+          "aiSummary": {
+            "bulletPoints": [],
+            "keyPoints": []
+          },
+          "_id": "6994bef6f4baf97152281ccd",
+          "title": "Quick Sort - Divide and Conquer",
+          "description": "Quick sort algorithm with partition logic, best/worst case analysis.",
+          "content": "# Quick Sort\n\n## Algorithm\n1. Choose a pivot element\n2. Partition: Place pivot in correct position\n3. Recursively sort left and right partitions\n\n## Partition Logic (Lomuto)\n- Choose last element as pivot\n- Maintain index i for smaller elements\n- Swap elements smaller than pivot to left side\n\n## Time Complexity\n- **Best Case:** O(n log n) - balanced partitions\n- **Average Case:** O(n log n)  \n- **Worst Case:** O(n²) - sorted array with last element as pivot\n- **Space:** O(log n) for recursion stack\n\n## Optimizations\n1. Random pivot selection\n2. Median of three\n3. Use insertion sort for small subarrays\n\n## vs Merge Sort\n| Feature | Quick Sort | Merge Sort |\n|---------|-----------|------------|\n| Average | O(n log n) | O(n log n) |\n| Worst   | O(n²)     | O(n log n) |\n| Space   | O(log n)  | O(n)       |\n| Stable  | No        | Yes        |\n| Cache   | Better    | Worse      |",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c7a",
+            "unitNumber": 5,
+            "name": "Sorting & Searching"
+          },
+          "topic": "Quick Sort",
+          "rating": 4,
+          "tags": [
+            "important",
+            "revision"
+          ],
+          "isImportant": true,
+          "isExamFocused": false,
+          "hasFormulas": false,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 38,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "quick-revision"
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "aiKeywords": [],
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.139Z",
+          "updatedAt": "2026-02-17T19:18:14.139Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 86,
+            "completeness": 80,
+            "examRelevance": 94,
+            "overall": 87
+          },
+          "aiSummary": {
+            "short": "Dijkstra's shortest path algorithm with pseudocode and complexity.",
+            "detailed": "Step-by-step Dijkstra's algorithm explanation with complexity analysis and limitations.",
+            "bulletPoints": [
+              "Greedy approach",
+              "No negative weights",
+              "O((V+E)logV) with heap",
+              "Trace practice for exams"
+            ],
+            "keyPoints": [
+              "Algorithm Steps",
+              "Time Complexity",
+              "Limitations",
+              "Exam Tips"
+            ]
+          },
+          "_id": "6994bef6f4baf97152281cc9",
+          "title": "Dijkstra's Shortest Path Algorithm",
+          "description": "Step-by-step explanation of Dijkstra's algorithm with example and pseudocode.",
+          "content": "# Dijkstra's Algorithm\n\n## Purpose\nFind shortest path from a source vertex to all other vertices in a weighted graph with non-negative edge weights.\n\n## Algorithm Steps\n1. Initialize distances: source = 0, all others = ∞\n2. Add source to priority queue\n3. While priority queue is not empty:\n   - Extract vertex u with minimum distance\n   - For each neighbor v of u:\n     - If dist[u] + weight(u,v) < dist[v]:\n       - Update dist[v] = dist[u] + weight(u,v)\n       - Update parent[v] = u\n\n## Time Complexity\n- With adjacency matrix: O(V²)\n- With binary heap: O((V + E) log V)\n- With Fibonacci heap: O(E + V log V)\n\n## Limitations\n- Does NOT work with negative edge weights\n- Use Bellman-Ford for negative weights\n\n## Important: Exam frequently asks to trace the algorithm step by step.",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c74",
+            "unitNumber": 4,
+            "name": "Graphs & Graph Algorithms"
+          },
+          "topic": "Dijkstra's Algorithm",
+          "rating": 5,
+          "tags": [
+            "important",
+            "exam-focused"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": false,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 52,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "high-value",
+            "pyq-relevant"
+          ],
+          "aiKeywords": [
+            {
+              "word": "Dijkstra",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cca"
+            },
+            {
+              "word": "shortest path",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281ccb"
+            },
+            {
+              "word": "greedy algorithm",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281ccc"
+            }
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.139Z",
+          "updatedAt": "2026-02-17T19:18:14.139Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 82,
+            "completeness": 75,
+            "examRelevance": 90,
+            "overall": 82
+          },
+          "aiSummary": {
+            "short": "Page replacement algorithms: FIFO, LRU, Optimal with Belady's anomaly.",
+            "detailed": "Covers all page replacement algorithms with pros/cons and the famous Belady's anomaly.",
+            "bulletPoints": [
+              "FIFO: Simple but Belady's anomaly",
+              "LRU: Good performance",
+              "OPT: Best but theoretical",
+              "Stack algorithms avoid anomaly"
+            ],
+            "keyPoints": [
+              "FIFO",
+              "LRU",
+              "Optimal",
+              "Belady's Anomaly"
+            ]
+          },
+          "_id": "6994bef6f4baf97152281cc4",
+          "title": "Page Replacement Algorithms",
+          "description": "FIFO, LRU, Optimal page replacement with examples and Belady's anomaly.",
+          "content": "# Page Replacement Algorithms\n\n## 1. FIFO (First In First Out)\n- Replace the oldest page\n- Simple to implement\n- Suffers from Belady's Anomaly\n\n## 2. LRU (Least Recently Used)\n- Replace page not used for longest time\n- Good performance, no Belady's anomaly\n- Implementation: Counter or Stack based\n\n## 3. Optimal (OPT)\n- Replace page that won't be used for longest time in future\n- Best performance (theoretical)\n- Not implementable in practice\n\n## Belady's Anomaly\n- More frames can lead to more page faults (FIFO only)\n- LRU and OPT are stack algorithms - no anomaly\n\n## Page Fault Rate Formula\nPage Fault Rate = Number of Page Faults / Total References",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c58",
+            "name": "Operating Systems",
+            "code": "CS303",
+            "id": "6994bef6f4baf97152281c58"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281ca5",
+            "unitNumber": 2,
+            "name": "Memory Management"
+          },
+          "topic": "Page Replacement Algorithms",
+          "rating": 4,
+          "tags": [
+            "important",
+            "exam-focused"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": false,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 29,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "quick-revision"
+          ],
+          "aiKeywords": [
+            {
+              "word": "page replacement",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cc5"
+            },
+            {
+              "word": "FIFO",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cc6"
+            },
+            {
+              "word": "LRU",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cc7"
+            },
+            {
+              "word": "Belady anomaly",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cc8"
+            }
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.137Z",
+          "updatedAt": "2026-02-17T19:18:14.137Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 90,
+            "completeness": 88,
+            "examRelevance": 96,
+            "overall": 91
+          },
+          "aiSummary": {
+            "short": "All CPU scheduling algorithms with formulas and comparison.",
+            "detailed": "Comprehensive guide covering FCFS, SJF, Priority, and Round Robin scheduling with formulas for turnaround, waiting, and response times.",
+            "bulletPoints": [
+              "FCFS: Simple, convoy effect",
+              "SJF: Optimal avg wait",
+              "Priority: Aging prevents starvation",
+              "RR: Fair, time quantum dependent"
+            ],
+            "keyPoints": [
+              "Scheduling Algorithms",
+              "Time Calculations",
+              "Comparison",
+              "Preemptive vs Non-preemptive"
+            ]
+          },
+          "_id": "6994bef6f4baf97152281cbe",
+          "title": "Process Scheduling Algorithms",
+          "description": "FCFS, SJF, Priority, Round Robin scheduling with Gantt charts and calculations.",
+          "content": "# CPU Scheduling Algorithms\n\n## 1. First Come First Serve (FCFS)\n- Non-preemptive\n- Simple but can cause convoy effect\n- Average waiting time can be high\n\n## 2. Shortest Job First (SJF)\n- Can be preemptive (SRTF) or non-preemptive\n- Optimal average waiting time (non-preemptive)\n- Starvation possible for long processes\n\n## 3. Priority Scheduling\n- Each process has a priority\n- Can be preemptive or non-preemptive\n- Aging solves starvation problem\n\n## 4. Round Robin (RR)\n- Preemptive with time quantum\n- Fair allocation\n- Performance depends on time quantum\n\n## Formulas\n- **Turnaround Time** = Completion Time - Arrival Time\n- **Waiting Time** = Turnaround Time - Burst Time\n- **Response Time** = First CPU time - Arrival Time\n- **Throughput** = Number of processes / Total time\n\n## Comparison Table\n| Algorithm | Preemptive | Starvation | Overhead |\n|-----------|-----------|------------|----------|\n| FCFS      | No        | No         | Low      |\n| SJF       | Both      | Yes        | Medium   |\n| Priority  | Both      | Yes        | Medium   |\n| RR        | Yes       | No         | High     |",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c58",
+            "name": "Operating Systems",
+            "code": "CS303",
+            "id": "6994bef6f4baf97152281c58"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281ca0",
+            "unitNumber": 1,
+            "name": "Process Management"
+          },
+          "topic": "CPU Scheduling Algorithms",
+          "rating": 5,
+          "tags": [
+            "important",
+            "exam-focused",
+            "formulas"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": true,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 67,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "high-value",
+            "formula-heavy",
+            "pyq-relevant"
+          ],
+          "aiKeywords": [
+            {
+              "word": "scheduling",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cbf"
+            },
+            {
+              "word": "FCFS",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cc0"
+            },
+            {
+              "word": "SJF",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cc1"
+            },
+            {
+              "word": "Round Robin",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cc2"
+            },
+            {
+              "word": "turnaround time",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cc3"
+            }
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.134Z",
+          "updatedAt": "2026-02-17T19:18:14.134Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 92,
+            "completeness": 90,
+            "examRelevance": 98,
+            "overall": 93
+          },
+          "aiSummary": {
+            "short": "Step-by-step normalization guide from 1NF to BCNF.",
+            "detailed": "Complete normalization reference covering all normal forms with clear definitions, examples, and Armstrong's axioms.",
+            "bulletPoints": [
+              "1NF: Atomic values",
+              "2NF: No partial dependency",
+              "3NF: No transitive dependency",
+              "BCNF: Every determinant is a super key"
+            ],
+            "keyPoints": [
+              "Normal Forms",
+              "Functional Dependencies",
+              "Armstrong's Axioms",
+              "Decomposition"
+            ]
+          },
+          "_id": "6994bef6f4baf97152281cb9",
+          "title": "Database Normalization - 1NF to BCNF",
+          "description": "Step-by-step guide to database normalization with examples for each normal form.",
+          "content": "# Database Normalization\n\n## Purpose\n- Eliminate data redundancy\n- Ensure data integrity\n- Organize data efficiently\n\n## Normal Forms\n\n### First Normal Form (1NF)\n- Each cell contains a single atomic value\n- Each record is unique\n- No repeating groups\n\n### Second Normal Form (2NF)\n- Must be in 1NF\n- No partial dependency (all non-key attributes depend on entire primary key)\n\n### Third Normal Form (3NF)\n- Must be in 2NF\n- No transitive dependency (non-key attributes don't depend on other non-key attributes)\n\n### Boyce-Codd Normal Form (BCNF)\n- Must be in 3NF\n- For every functional dependency X → Y, X must be a super key\n\n## Key Formula\n**Armstrong's Axioms:**\n1. Reflexivity: If Y ⊆ X, then X → Y\n2. Augmentation: If X → Y, then XZ → YZ\n3. Transitivity: If X → Y and Y → Z, then X → Z",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c57",
+            "name": "Database Management Systems",
+            "code": "CS302",
+            "id": "6994bef6f4baf97152281c57"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c91",
+            "unitNumber": 3,
+            "name": "Normalization"
+          },
+          "topic": "Functional Dependencies",
+          "rating": 5,
+          "tags": [
+            "important",
+            "exam-focused",
+            "formulas"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": true,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 58,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "high-value",
+            "pyq-relevant"
+          ],
+          "aiKeywords": [
+            {
+              "word": "normalization",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cba"
+            },
+            {
+              "word": "1NF 2NF 3NF",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cbb"
+            },
+            {
+              "word": "BCNF",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cbc"
+            },
+            {
+              "word": "functional dependency",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cbd"
+            }
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.132Z",
+          "updatedAt": "2026-02-17T19:18:14.132Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 85,
+            "completeness": 78,
+            "examRelevance": 92,
+            "overall": 85
+          },
+          "aiSummary": {
+            "short": "Complete SQL joins reference with all join types and examples.",
+            "detailed": "Covers all SQL join types including INNER, LEFT, RIGHT, FULL OUTER, CROSS, and SELF joins with syntax examples.",
+            "bulletPoints": [
+              "6 types of joins",
+              "INNER JOIN returns matching rows",
+              "LEFT JOIN keeps all left table rows",
+              "NULL handling in outer joins"
+            ],
+            "keyPoints": [
+              "Join Types",
+              "SQL Syntax",
+              "NULL Handling",
+              "Complex Queries"
+            ]
+          },
+          "_id": "6994bef6f4baf97152281cb4",
+          "title": "SQL Joins - Complete Reference",
+          "description": "All types of SQL joins explained with examples and Venn diagrams.",
+          "content": "# SQL Joins\n\n## Types of Joins\n1. **INNER JOIN** - Returns matching rows from both tables\n2. **LEFT JOIN** - Returns all rows from left + matching from right\n3. **RIGHT JOIN** - Returns all rows from right + matching from left\n4. **FULL OUTER JOIN** - Returns all rows when match in either table\n5. **CROSS JOIN** - Cartesian product of both tables\n6. **SELF JOIN** - Table joined with itself\n\n## Syntax Examples\n\n### INNER JOIN\n```sql\nSELECT s.name, c.course_name\nFROM students s\nINNER JOIN courses c ON s.course_id = c.id;\n```\n\n### LEFT JOIN\n```sql\nSELECT s.name, g.grade\nFROM students s\nLEFT JOIN grades g ON s.id = g.student_id;\n```\n\n## Important for Exams\n- Know the difference between all join types\n- Practice writing complex queries with multiple joins\n- Understand NULL handling in outer joins",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c57",
+            "name": "Database Management Systems",
+            "code": "CS302",
+            "id": "6994bef6f4baf97152281c57"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c8c",
+            "unitNumber": 2,
+            "name": "SQL & Relational Algebra"
+          },
+          "topic": "Joins & Subqueries",
+          "rating": 4,
+          "tags": [
+            "important",
+            "exam-focused"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": false,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "viewCount": 35,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "high-value",
+            "definition-rich"
+          ],
+          "aiKeywords": [
+            {
+              "word": "SQL joins",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cb5"
+            },
+            {
+              "word": "INNER JOIN",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cb6"
+            },
+            {
+              "word": "LEFT JOIN",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cb7"
+            },
+            {
+              "word": "OUTER JOIN",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cb8"
+            }
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.117Z",
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.129Z",
+          "updatedAt": "2026-02-17T19:18:14.129Z",
+          "__v": 0
+        },
+        {
+          "aiScore": {
+            "quality": 88,
+            "completeness": 82,
+            "examRelevance": 95,
+            "overall": 88
+          },
+          "aiSummary": {
+            "short": "Comprehensive BST guide covering operations, complexity, and balanced trees.",
+            "detailed": "This note covers Binary Search Trees from basics to advanced concepts including all CRUD operations with complexity analysis, BST properties, and self-balancing trees like AVL.",
+            "bulletPoints": [
+              "BST property: left < root < right",
+              "Inorder traversal gives sorted output",
+              "Average case: O(log n)",
+              "AVL trees maintain balance"
+            ],
+            "keyPoints": [
+              "BST Operations",
+              "Time Complexity",
+              "Balanced BST",
+              "AVL Trees"
+            ]
+          },
+          "_id": "6994bef6f4baf97152281cad",
+          "title": "Introduction to Binary Search Trees",
+          "description": "Complete guide to BST operations including insertion, deletion, and traversal with time complexity analysis.",
+          "content": "# Binary Search Trees (BST)\n\nA Binary Search Tree is a node-based binary tree data structure with the following properties:\n- The left subtree contains only nodes with keys lesser than the node's key\n- The right subtree contains only nodes with keys greater than the node's key\n- Both the left and right subtrees must also be binary search trees\n\n## Operations & Time Complexity\n| Operation | Average | Worst Case |\n|-----------|---------|------------|\n| Search    | O(log n)| O(n)       |\n| Insert    | O(log n)| O(n)       |\n| Delete    | O(log n)| O(n)       |\n\n## Key Concepts\n1. **Inorder traversal** of BST gives sorted output\n2. **Balanced BST** guarantees O(log n) operations\n3. **AVL trees** are self-balancing BSTs\n\n## Important Formulas\n- Height of balanced BST: h = log₂(n+1)\n- Maximum nodes at level l: 2^l\n- Total nodes in complete binary tree of height h: 2^(h+1) - 1",
+          "subject": {
+            "_id": "6994bef6f4baf97152281c56",
+            "name": "Data Structures & Algorithms",
+            "code": "CS301",
+            "id": "6994bef6f4baf97152281c56"
+          },
+          "unit": {
+            "_id": "6994bef6f4baf97152281c6e",
+            "unitNumber": 3,
+            "name": "Trees & Binary Search Trees"
+          },
+          "topic": "Binary Search Tree Operations",
+          "rating": 5,
+          "tags": [
+            "important",
+            "exam-focused",
+            "formulas"
+          ],
+          "isImportant": true,
+          "isExamFocused": true,
+          "hasFormulas": true,
+          "hasDiagrams": false,
+          "isPYQ": false,
+          "version": 1,
+          "averageRating": 0,
+          "totalRatings": 0,
+          "status": "approved",
+          "isDeleted": false,
+          "uploadedBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "visibility": "private",
+          "branch": "CSE",
+          "semester": 5,
+          "section": "A",
+          "viewCount": 42,
+          "downloadCount": 0,
+          "aiTags": [
+            "exam-important",
+            "high-value",
+            "formula-heavy"
+          ],
+          "aiKeywords": [
+            {
+              "word": "BST",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281cae"
+            },
+            {
+              "word": "binary search tree",
+              "importance": "critical",
+              "_id": "6994bef6f4baf97152281caf"
+            },
+            {
+              "word": "traversal",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cb0"
+            },
+            {
+              "word": "insertion",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cb1"
+            },
+            {
+              "word": "deletion",
+              "importance": "high",
+              "_id": "6994bef6f4baf97152281cb2"
+            },
+            {
+              "word": "time complexity",
+              "importance": "medium",
+              "_id": "6994bef6f4baf97152281cb3"
+            }
+          ],
+          "aiAnalyzedAt": "2026-02-17T19:18:14.116Z",
+          "pyqMatches": [],
+          "createdAt": "2026-02-17T19:18:14.127Z",
+          "updatedAt": "2026-02-17T19:18:14.127Z",
+          "__v": 0
+        }
+      ],
+      "pagination": {
+        "total": 10,
+        "page": 1,
+        "limit": 10,
+        "totalPages": 1,
+        "hasNextPage": false,
+        "hasPrevPage": false
+      }
+    },
+    "admin_announcements": {
+      "announcements": [
+        {
+          "_id": "6994bef6f4baf97152281d42",
+          "title": "📝 Mid-Semester Examination Schedule",
+          "message": "Mid-semester exams will be held from March 1-10, 2026. The detailed timetable is attached. Students are advised to prepare thoroughly. No re-exam will be conducted without valid medical certificate.\n\nExam timings: 10:00 AM - 1:00 PM\nVenue: Examination Hall Block A & B",
+          "type": "exam",
+          "priority": "high",
+          "targetAudience": "students",
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [],
+          "publishedAt": "2026-02-15T19:18:14.193Z",
+          "isActive": true,
+          "isPinned": true,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.400Z",
+          "updatedAt": "2026-02-17T19:18:14.400Z",
+          "__v": 0,
+          "isRead": false
+        },
+        {
+          "_id": "6994bef6f4baf97152281d44",
+          "title": "🎉 Tech Fest 2026 - Register Now!",
+          "message": "Annual Tech Fest \"InnoVerse 2026\" is here! Events include:\n\n🏆 Hackathon (48 hours)\n💻 Competitive Programming Contest\n🤖 AI/ML Workshop\n🎮 Game Development Challenge\n📱 App Development Sprint\n\nRegistration deadline: February 20, 2026\nFee: ₹200 per participant\n\nRegister at: techfest.college.edu",
+          "type": "event",
+          "priority": "medium",
+          "targetAudience": "all",
+          "sections": [],
+          "publishedAt": "2026-02-14T19:18:14.193Z",
+          "isActive": true,
+          "isPinned": true,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.402Z",
+          "updatedAt": "2026-02-17T19:18:14.402Z",
+          "__v": 0,
+          "isRead": false
+        },
+        {
+          "_id": "6994bef6f4baf97152281d43",
+          "title": "🏫 DSA Lab Assignment Due Date Extended",
+          "message": "Due to multiple requests, the due date for the BST Implementation assignment has been extended by 3 days. New deadline: February 14, 2026.\n\nPlease make sure to include all test cases and time complexity analysis.",
+          "type": "academic",
+          "priority": "medium",
+          "targetAudience": "students",
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [
+            "A",
+            "B"
+          ],
+          "publishedAt": "2026-02-16T19:18:14.193Z",
+          "isActive": true,
+          "isPinned": false,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.401Z",
+          "updatedAt": "2026-02-17T19:18:14.401Z",
+          "__v": 0,
+          "isRead": false
+        },
+        {
+          "_id": "6994bef6f4baf97152281d45",
+          "title": "📚 Library: New Books Available",
+          "message": "New books added to the library:\n\n1. \"Introduction to Algorithms\" - CLRS (4th Edition)\n2. \"Database System Concepts\" - Silberschatz (7th Edition)\n3. \"Operating System Concepts\" - Galvin (10th Edition)\n4. \"Computer Networking: A Top-Down Approach\" - Kurose\n\nVisit the library counter to issue. Limited copies available!",
+          "type": "general",
+          "priority": "low",
+          "targetAudience": "all",
+          "sections": [],
+          "publishedAt": "2026-02-12T19:18:14.193Z",
+          "isActive": true,
+          "isPinned": false,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.403Z",
+          "updatedAt": "2026-02-17T19:18:14.403Z",
+          "__v": 0,
+          "isRead": false
+        },
+        {
+          "_id": "6994bef6f4baf97152281d48",
+          "title": "🔧 DBMS Lab - Install MySQL Workbench",
+          "message": "All students are required to install MySQL Workbench 8.0 on their laptops before the next lab session. Download from: https://dev.mysql.com/downloads/workbench/\n\nAlso install MySQL Server Community Edition.",
+          "type": "academic",
+          "priority": "medium",
+          "targetAudience": "students",
+          "branch": "CSE",
+          "semester": 5,
+          "sections": [],
+          "publishedAt": "2026-02-10T19:18:14.193Z",
+          "isActive": true,
+          "isPinned": false,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.405Z",
+          "updatedAt": "2026-02-17T19:18:14.405Z",
+          "__v": 0,
+          "isRead": false
+        },
+        {
+          "_id": "6994bef6f4baf97152281d46",
+          "title": "⚠️ Holiday Notice - Republic Day",
+          "message": "The college will remain closed on January 26, 2026 (Monday) on account of Republic Day. Regular classes will resume on January 27, 2026.",
+          "type": "holiday",
+          "priority": "medium",
+          "targetAudience": "all",
+          "sections": [],
+          "publishedAt": "2026-02-02T19:18:14.193Z",
+          "isActive": true,
+          "isPinned": false,
+          "createdBy": {
+            "_id": "6994bef5f4baf97152281c2c",
+            "name": "Rahul Mahato",
+            "role": "student"
+          },
+          "attachments": [],
+          "createdAt": "2026-02-17T19:18:14.404Z",
+          "updatedAt": "2026-02-17T19:18:14.404Z",
+          "__v": 0,
+          "isRead": false
+        }
+      ],
+      "pagination": {
+        "total": 6,
+        "page": 1,
+        "limit": 10,
+        "totalPages": 1,
+        "hasNextPage": false,
+        "hasPrevPage": false
+      }
+    }
+  }
+}

@@ -36,6 +36,22 @@ const seedDatabase = async () => {
       isActive: true
     });
 
+    const teacher = await User.create({
+      name: 'Prof. Teacher',
+      email: 'teacher@edutrack.com',
+      password: 'teacher123',
+      role: 'teacher',
+      isActive: true
+    });
+
+    const admin = await User.create({
+      name: 'System Admin',
+      email: 'admin@edutrack.com',
+      password: 'admin123456',
+      role: 'admin',
+      isActive: true
+    });
+
     // Generate JWT token for the student
     const studentToken = jwt.sign(
       { id: student._id },
@@ -902,30 +918,30 @@ Cables, Hubs, Bits transmission
       { user: student._id, dayOfWeek: 'monday', startTime: '11:00', endTime: '11:30', type: 'break', notes: 'Tea Break ☕', isRecurring: true },
       { user: student._id, dayOfWeek: 'monday', startTime: '11:30', endTime: '13:00', subject: subjects[0]._id, type: 'lab', room: 'Lab 102', teacher: 'Dr. Priya Sharma', isRecurring: true },
       { user: student._id, dayOfWeek: 'monday', startTime: '14:00', endTime: '15:00', subject: subjects[3]._id, type: 'lecture', room: 'Room 305', teacher: 'Dr. Ravi Kumar', isRecurring: true },
-      
+
       // Tuesday
       { user: student._id, dayOfWeek: 'tuesday', startTime: '09:00', endTime: '10:00', subject: subjects[2]._id, type: 'lecture', room: 'Room 302', teacher: 'Prof. Neha Gupta', isRecurring: true },
       { user: student._id, dayOfWeek: 'tuesday', startTime: '10:00', endTime: '11:00', subject: subjects[4]._id, type: 'lecture', room: 'Lab 201', teacher: 'Dr. Sanjay Patel', isRecurring: true },
       { user: student._id, dayOfWeek: 'tuesday', startTime: '11:30', endTime: '13:00', subject: subjects[1]._id, type: 'lab', room: 'Lab 103', teacher: 'Prof. Amit Verma', isRecurring: true },
       { user: student._id, dayOfWeek: 'tuesday', startTime: '14:00', endTime: '15:00', subject: subjects[5]._id, type: 'lecture', room: 'Room 101', teacher: 'Dr. Anand Singh', isRecurring: true },
-      
+
       // Wednesday
       { user: student._id, dayOfWeek: 'wednesday', startTime: '09:00', endTime: '10:00', subject: subjects[0]._id, type: 'lecture', room: 'Room 301', teacher: 'Dr. Priya Sharma', isRecurring: true },
       { user: student._id, dayOfWeek: 'wednesday', startTime: '10:00', endTime: '11:00', subject: subjects[3]._id, type: 'lecture', room: 'Room 305', teacher: 'Dr. Ravi Kumar', isRecurring: true },
       { user: student._id, dayOfWeek: 'wednesday', startTime: '11:30', endTime: '13:00', subject: subjects[2]._id, type: 'lab', room: 'Lab 104', teacher: 'Prof. Neha Gupta', isRecurring: true },
       { user: student._id, dayOfWeek: 'wednesday', startTime: '14:00', endTime: '15:00', subject: subjects[5]._id, type: 'tutorial', room: 'Room 101', teacher: 'Dr. Anand Singh', isRecurring: true },
-      
+
       // Thursday
       { user: student._id, dayOfWeek: 'thursday', startTime: '09:00', endTime: '10:00', subject: subjects[1]._id, type: 'lecture', room: 'Room 204', teacher: 'Prof. Amit Verma', isRecurring: true },
       { user: student._id, dayOfWeek: 'thursday', startTime: '10:00', endTime: '11:00', subject: subjects[2]._id, type: 'lecture', room: 'Room 302', teacher: 'Prof. Neha Gupta', isRecurring: true },
       { user: student._id, dayOfWeek: 'thursday', startTime: '11:30', endTime: '13:00', subject: subjects[4]._id, type: 'lab', room: 'Lab 201', teacher: 'Dr. Sanjay Patel', isRecurring: true },
       { user: student._id, dayOfWeek: 'thursday', startTime: '14:00', endTime: '15:00', subject: subjects[0]._id, type: 'tutorial', room: 'Room 301', teacher: 'Dr. Priya Sharma', isRecurring: true },
-      
+
       // Friday
       { user: student._id, dayOfWeek: 'friday', startTime: '09:00', endTime: '10:00', subject: subjects[3]._id, type: 'lecture', room: 'Room 305', teacher: 'Dr. Ravi Kumar', isRecurring: true },
       { user: student._id, dayOfWeek: 'friday', startTime: '10:00', endTime: '11:00', subject: subjects[5]._id, type: 'lecture', room: 'Room 101', teacher: 'Dr. Anand Singh', isRecurring: true },
       { user: student._id, dayOfWeek: 'friday', startTime: '11:30', endTime: '12:30', subject: subjects[4]._id, type: 'lecture', room: 'Lab 201', teacher: 'Dr. Sanjay Patel', isRecurring: true },
-      
+
       // Saturday (optional classes)
       { user: student._id, dayOfWeek: 'saturday', startTime: '09:00', endTime: '10:30', subject: subjects[0]._id, type: 'tutorial', room: 'Room 301', teacher: 'Dr. Priya Sharma', notes: 'Extra doubt clearing session', isRecurring: true },
     ]);
@@ -1408,7 +1424,7 @@ Cables, Hubs, Bits transmission
     console.log('─'.repeat(50));
     console.log('\n  🔑 Login: student@edutrack.com / student123\n');
 
-    return { studentToken, student, subjects };
+    return { studentToken, student, teacher, admin, subjects };
 
   } catch (error) {
     console.error('❌ Error seeding database:', error.message);

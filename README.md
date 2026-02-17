@@ -149,6 +149,14 @@ Distraction-free study environment with timer and focused note access.
 
 ---
 
+## 🚀 Deployment
+
+Zero-cost deployment is fully supported! You can host the frontend on Vercel and backend on Render for free.
+
+👉 **[Read the Full Deployment Guide](DEPLOYMENT_GUIDE.md)** for step-by-step instructions.
+
+---
+
 ## 📦 Installation
 
 ### Prerequisites

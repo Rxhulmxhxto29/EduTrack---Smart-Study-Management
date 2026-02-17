@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload'); // Removed for cost optimization
 const setupDatabase = require('./src/config/database');
 const errorHandler = require('./src/middleware/errorHandler');
 
@@ -20,7 +20,25 @@ const flashcardRoutes = require('./src/routes/flashcardRoutes');
 const seedDatabase = require('./src/config/seedData');
 
 // Initialize express app
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+
+// ... (other imports)
+
 const app = express();
+
+// Security Middleware
+app.use(helmet({
+  crossOriginResourcePolicy: false, // Allow loading resources across origins (dev mode)
+}));
+
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: 'Too many requests from this IP, please try again later'
+});
+app.use('/api', limiter);
 
 // Display header
 console.log('\n' + '='.repeat(60));
@@ -42,7 +60,6 @@ setupDatabase().then(async () => {
   console.error('❌ Database setup failed:', err.message);
 });
 
-// Middleware
 app.use(cors({
   origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
   credentials: true
@@ -50,11 +67,8 @@ app.use(cors({
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(fileUpload({
-  useTempFiles: true,
-  tempFileDir: '/tmp/',
-  limits: { fileSize: parseInt(process.env.MAX_FILE_SIZE) || 10 * 1024 * 1024 }
-}));
+// File upload middleware removed
+// app.use(fileUpload({ ... }));
 
 // Root route
 app.get('/', (req, res) => {
@@ -79,36 +93,19 @@ app.get('/', (req, res) => {
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
+  res.json({
+    status: 'OK',
     message: 'EduTrack Backend is running',
     timestamp: new Date().toISOString()
   });
 });
 
-// Simple file upload endpoint (stores as base64 for simplicity)
+// File upload endpoint disabled for free tier
 app.post('/api/upload', (req, res) => {
-  try {
-    if (!req.files || !req.files.file) {
-      return res.status(400).json({ success: false, message: 'No file uploaded' });
-    }
-    
-    const file = req.files.file;
-    const base64 = file.data.toString('base64');
-    const dataUrl = `data:${file.mimetype};base64,${base64}`;
-    
-    res.json({
-      success: true,
-      data: {
-        url: dataUrl,
-        filename: file.name,
-        mimetype: file.mimetype,
-        size: file.size
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
+  res.status(501).json({
+    success: false,
+    message: 'File upload is disabled in the free version to reduce costs. Please use external links.'
+  });
 });
 
 // API Routes

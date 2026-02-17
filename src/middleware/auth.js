@@ -49,6 +49,18 @@ exports.protect = asyncHandler(async (req, res, next) => {
 });
 
 /**
+ * Authorize certain roles
+ */
+exports.authorize = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      throw ApiError.forbidden(`User role ${req.user.role} is not authorized to access this route`);
+    }
+    next();
+  };
+};
+
+/**
  * Optional authentication - doesn't throw error if no token
  */
 exports.optionalAuth = asyncHandler(async (req, res, next) => {
@@ -62,7 +74,7 @@ exports.optionalAuth = asyncHandler(async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       const user = await User.findById(decoded.id).select('-password');
-      
+
       if (user && user.isActive) {
         req.user = user;
       }
