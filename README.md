@@ -115,7 +115,7 @@ Distraction-free study environment with timer and focused note access.
 
 ## 🚀 Demo
 
-**Live Demo**: Coming Soon
+**Live Demo**: [https://edu-track-smart-study-management.vercel.app](https://edu-track-smart-study-management.vercel.app)
 
 **Local Setup**: Follow the installation instructions below to run locally.
 
