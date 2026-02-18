@@ -9,18 +9,18 @@ const AVATAR_OPTIONS = [
   {
     id: 'male',
     name: 'Male',
-    url: 'https://api.dicebear.com/7.x/lorelei/svg?seed=John&backgroundColor=b6e3f4&hair=variant01&beard=variant01'
+    url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=John&backgroundColor=b6e3f4&hair=variant01&beard=variant01'
   },
   {
     id: 'female',
-    name: 'Female', 
-    url: 'https://api.dicebear.com/7.x/lorelei/svg?seed=Emma&backgroundColor=ffd5dc&hair=variant17&earrings=variant01'
+    name: 'Female',
+    url: 'https://api.dicebear.com/9.x/lorelei/svg?seed=Emma&backgroundColor=ffd5dc&hair=variant17&earrings=variant01'
   }
 ];
 
 function Profile() {
   const { user: authUser, updateUser } = useAuth();
-  
+
   // Merge auth user with additional profile fields
   const [user, setUser] = useState({
     ...authUser,
@@ -75,7 +75,7 @@ function Profile() {
             <div className="relative group">
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-1 shadow-xl">
                 <div className="w-full h-full rounded-full bg-white dark:bg-gray-800 flex items-center justify-center overflow-hidden">
-                  <img 
+                  <img
                     src={user.avatar}
                     alt="Avatar"
                     className="w-full h-full object-cover"
@@ -87,13 +87,13 @@ function Profile() {
               {/* Online indicator */}
               <div className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 rounded-full border-4 border-white dark:border-gray-800 shadow-lg"></div>
               {/* Camera button */}
-              <button 
+              <button
                 onClick={() => setShowAvatarPicker(!showAvatarPicker)}
                 className="absolute bottom-0 right-0 p-2.5 bg-white dark:bg-gray-700 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 hover:scale-110 transition-all duration-200"
               >
                 <Camera className="w-4 h-4 text-gray-600 dark:text-gray-400" />
               </button>
-              
+
               {/* Avatar Picker Dropdown */}
               {showAvatarPicker && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50">
@@ -103,11 +103,10 @@ function Profile() {
                       <button
                         key={avatar.id}
                         onClick={() => selectAvatar(avatar.url)}
-                        className={`relative w-16 h-16 rounded-full overflow-hidden border-3 transition-all hover:scale-110 ${
-                          user.avatar === avatar.url 
-                            ? 'border-indigo-500 ring-2 ring-indigo-500 ring-offset-2' 
-                            : 'border-gray-200 dark:border-gray-600'
-                        }`}
+                        className={`relative w-16 h-16 rounded-full overflow-hidden border-4 transition-all hover:scale-110 ${user.avatar === avatar.url
+                          ? 'border-indigo-500 ring-2 ring-indigo-500 ring-offset-2'
+                          : 'border-gray-200 dark:border-gray-600'
+                          }`}
                       >
                         <img src={avatar.url} alt={avatar.name} className="w-full h-full object-cover" />
                         {user.avatar === avatar.url && (
@@ -153,7 +152,7 @@ function Profile() {
         {/* Details Card */}
         <Card>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Personal Information</h3>
-          
+
           {isEditing ? (
             <div className="space-y-4">
               <div>
@@ -167,7 +166,7 @@ function Profile() {
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Phone Number
@@ -197,7 +196,7 @@ function Profile() {
                   <p className="font-medium text-gray-900 dark:text-white">{user.name}</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <Mail className="w-5 h-5 text-gray-400" />
                 <div>
@@ -205,7 +204,7 @@ function Profile() {
                   <p className="font-medium text-gray-900 dark:text-white">{user.email}</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <BookOpen className="w-5 h-5 text-gray-400" />
                 <div>
@@ -213,7 +212,7 @@ function Profile() {
                   <p className="font-medium text-gray-900 dark:text-white">{user.enrollmentNo}</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <Calendar className="w-5 h-5 text-gray-400" />
                 <div>
@@ -232,7 +231,7 @@ function Profile() {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Academic Information</h3>
           </div>
-          
+
           {isEditing ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -252,7 +251,7 @@ function Profile() {
                   <option value="Electrical">Electrical</option>
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Current Semester

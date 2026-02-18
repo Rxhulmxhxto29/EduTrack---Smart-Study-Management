@@ -2,8 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import StudentLayout from '../../components/layout/StudentLayout';
 import Card from '../../components/common/Card';
 import api from '../../services/api';
-import { 
-  BookOpen, Plus, Edit2, Trash2, X, Upload, FileText, Image, 
+import {
+  BookOpen, Plus, Edit2, Trash2, X, Upload, FileText, Image,
   Play, Pause, RotateCcw, CheckCircle, XCircle, Clock, Target,
   Brain, Layers, Timer, Award, ChevronLeft, ChevronRight, Shuffle,
   Volume2, Check, AlertCircle, Download, Eye, Paperclip, Sparkles, Save, Rocket
@@ -53,13 +53,13 @@ const saveCustomSubjects = (subjects) => {
 function Assignments() {
   // Active tab
   const [activeTab, setActiveTab] = useState('materials');
-  
+
   // Custom subjects state
   const [customSubjects, setCustomSubjects] = useState(loadCustomSubjects);
   const [apiSubjects, setApiSubjects] = useState([]);
   const [showCustomInput, setShowCustomInput] = useState(null); // Which modal: 'material', 'flashcard', 'task'
   const [newCustomSubject, setNewCustomSubject] = useState('');
-  
+
   // Get all subjects (default + custom + API)
   const ALL_SUBJECTS = [...DEFAULT_SUBJECTS, ...customSubjects, ...(Array.isArray(apiSubjects) ? apiSubjects.map(s => s.name) : [])];
 
@@ -75,7 +75,7 @@ function Assignments() {
       toast.success('Subject added!');
     }
   };
-  
+
   // Study Materials State
   const [materials, setMaterials] = useState(() => loadFromStorage(STORAGE_KEYS.materials, []));
   const [showMaterialModal, setShowMaterialModal] = useState(false);
@@ -239,17 +239,17 @@ function Assignments() {
       toast.error('Please fill question and answer');
       return;
     }
-    
+
     try {
       // Find the subject ID from apiSubjects
       const subjectObj = apiSubjects.find(s => s.name === flashcardForm.subject);
       const subjectId = subjectObj?._id || apiSubjects[0]?._id;
-      
+
       if (!subjectId) {
         toast.error('Please select a valid subject');
         return;
       }
-      
+
       const response = await api.post('/api/flashcards', {
         question: flashcardForm.question,
         answer: flashcardForm.answer,
@@ -257,7 +257,7 @@ function Assignments() {
         difficulty: 'medium',
         deck: 'General'
       });
-      
+
       setFlashcards([response.data.data.flashcard, ...flashcards]);
       setShowFlashcardModal(false);
       setFlashcardForm({ question: '', answer: '', subject: '' });
@@ -311,7 +311,7 @@ function Assignments() {
       toast.error('Need at least 3 flashcards to create a quiz');
       return;
     }
-    
+
     // Generate quiz questions from flashcards
     const shuffled = [...flashcards].sort(() => Math.random() - 0.5).slice(0, Math.min(10, flashcards.length));
     const questions = shuffled.map(card => {
@@ -321,9 +321,9 @@ function Assignments() {
         .map(f => f.answer)
         .sort(() => Math.random() - 0.5)
         .slice(0, 3);
-      
+
       const options = [...otherAnswers, card.answer].sort(() => Math.random() - 0.5);
-      
+
       return {
         _id: card._id,
         question: card.question,
@@ -331,7 +331,7 @@ function Assignments() {
         options: options.length >= 4 ? options : [card.answer, 'Option A', 'Option B', 'Option C']
       };
     });
-    
+
     setQuizQuestions(questions);
     setCurrentQuizIndex(0);
     setQuizAnswers({});
@@ -344,7 +344,7 @@ function Assignments() {
     quizQuestions.forEach(q => {
       if (quizAnswers[q._id] === q.correctAnswer) score++;
     });
-    
+
     const result = {
       _id: Date.now().toString(),
       date: new Date().toISOString(),
@@ -352,7 +352,7 @@ function Assignments() {
       correctAnswers: score,
       percentage: Math.round((score / quizQuestions.length) * 100)
     };
-    
+
     setQuizResults([result, ...quizResults]);
     setQuizSubmitted(true);
     toast.success(`Quiz completed! Score: ${result.percentage}%`);
@@ -382,7 +382,7 @@ function Assignments() {
       toast.error('Please enter task title');
       return;
     }
-    
+
     if (editingTask) {
       setTasks(tasks.map(t => t._id === editingTask._id ? { ...t, ...taskForm } : t));
       toast.success('Task updated!');
@@ -398,7 +398,7 @@ function Assignments() {
       setTasks([newTask, ...tasks]);
       toast.success('Task added!');
     }
-    
+
     setShowTaskModal(false);
     setTaskForm({ title: '', subject: '', dueDate: '', priority: 'medium', status: 'pending' });
     setEditingTask(null);
@@ -408,8 +408,8 @@ function Assignments() {
     setTasks(tasks.map(t => {
       if (t._id === id) {
         const newCompleted = !t.completed;
-        return { 
-          ...t, 
+        return {
+          ...t,
           completed: newCompleted,
           status: newCompleted ? 'submitted' : (t.submission ? 'submitted' : 'pending')
         };
@@ -425,10 +425,10 @@ function Assignments() {
 
   const editTask = (task) => {
     setEditingTask(task);
-    setTaskForm({ 
-      title: task.title, 
-      subject: task.subject || '', 
-      dueDate: task.dueDate || '', 
+    setTaskForm({
+      title: task.title,
+      subject: task.subject || '',
+      dueDate: task.dueDate || '',
       priority: task.priority || 'medium',
       status: task.status || 'pending'
     });
@@ -448,7 +448,7 @@ function Assignments() {
         toast.error('File size must be less than 10MB');
         return;
       }
-      
+
       const reader = new FileReader();
       reader.onload = (e) => {
         const submission = {
@@ -458,13 +458,13 @@ function Assignments() {
           data: e.target.result,
           submittedAt: new Date().toISOString()
         };
-        
-        setTasks(tasks.map(t => 
-          t._id === submittingTask._id 
+
+        setTasks(tasks.map(t =>
+          t._id === submittingTask._id
             ? { ...t, submission, status: 'submitted', completed: true }
             : t
         ));
-        
+
         toast.success(`Submitted: ${file.name}`);
         setShowSubmissionModal(false);
         setSubmittingTask(null);
@@ -474,8 +474,8 @@ function Assignments() {
   };
 
   const removeSubmission = (taskId) => {
-    setTasks(tasks.map(t => 
-      t._id === taskId 
+    setTasks(tasks.map(t =>
+      t._id === taskId
         ? { ...t, submission: null, status: 'pending', completed: false }
         : t
     ));
@@ -511,7 +511,7 @@ function Assignments() {
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
           <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-          
+
           <div className="relative flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div className="flex items-center gap-6">
               <div className="p-4 bg-white/20 backdrop-blur-sm rounded-2xl">
@@ -546,20 +546,18 @@ function Assignments() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
-                  activeTab === tab.id
+                className={`flex items-center gap-2 px-4 py-3 rounded-xl font-medium transition-all duration-300 ${activeTab === tab.id
                     ? `bg-gradient-to-r ${tab.color} text-white shadow-lg`
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
-                }`}
+                  }`}
               >
                 <tab.icon className="w-4 h-4" />
                 <span>{tab.label}</span>
                 {tab.count > 0 && (
-                  <span className={`text-xs px-2 py-0.5 rounded-full ${
-                    activeTab === tab.id 
-                      ? 'bg-white/20' 
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${activeTab === tab.id
+                      ? 'bg-white/20'
                       : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300'
-                  }`}>
+                    }`}>
                     {tab.count}
                   </span>
                 )}
@@ -592,8 +590,8 @@ function Assignments() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {materials.map((material, idx) => (
-                <div 
-                  key={material._id} 
+                <div
+                  key={material._id}
                   className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in"
                   style={{ animationDelay: `${idx * 50}ms` }}
                 >
@@ -620,11 +618,11 @@ function Assignments() {
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
-                    
+
                     {material.file?.type?.startsWith('image/') && (
                       <img src={material.file.data} alt={material.title} className="w-full h-32 object-cover rounded-lg" />
                     )}
-                    
+
                     <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
                       <span className="text-xs text-gray-400">
                         {(material.file?.size / 1024).toFixed(1)} KB
@@ -700,37 +698,37 @@ function Assignments() {
                 </div>
               ) : (
                 flashcards.map((card, idx) => (
-                <div 
-                  key={card._id} 
-                  className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in"
-                  style={{ animationDelay: `${idx * 50}ms` }}
-                >
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-violet-600"></div>
-                  <div className="p-4 space-y-3">
-                    <div className="flex justify-between items-start">
-                      <span className="px-3 py-1 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
-                        {card.subjectName || card.subject?.name || 'General'}
-                      </span>
-                      <button
-                        onClick={() => deleteFlashcard(card._id)}
-                        className="opacity-0 group-hover:opacity-100 p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-all"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                    <div className="pt-2 space-y-3">
-                      <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <span className="text-xs text-gray-400 uppercase tracking-wide">Question</span>
-                        <p className="font-medium text-gray-900 dark:text-white mt-1">{card.question}</p>
+                  <div
+                    key={card._id}
+                    className="group relative overflow-hidden bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in"
+                    style={{ animationDelay: `${idx * 50}ms` }}
+                  >
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-violet-600"></div>
+                    <div className="p-4 space-y-3">
+                      <div className="flex justify-between items-start">
+                        <span className="px-3 py-1 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
+                          {card.subjectName || card.subject?.name || 'General'}
+                        </span>
+                        <button
+                          onClick={() => deleteFlashcard(card._id)}
+                          className="opacity-0 group-hover:opacity-100 p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-all"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </div>
-                      <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
-                        <span className="text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">Answer</span>
-                        <p className="text-gray-700 dark:text-gray-300 mt-1">{card.answer}</p>
+                      <div className="pt-2 space-y-3">
+                        <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                          <span className="text-xs text-gray-400 uppercase tracking-wide">Question</span>
+                          <p className="font-medium text-gray-900 dark:text-white mt-1">{card.question}</p>
+                        </div>
+                        <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+                          <span className="text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">Answer</span>
+                          <p className="text-gray-700 dark:text-gray-300 mt-1">{card.answer}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))
               )}
             </div>
 
@@ -892,17 +890,16 @@ function Assignments() {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
                 {quizQuestions[currentQuizIndex]?.question}
               </h3>
-              
+
               <div className="space-y-3">
                 {quizQuestions[currentQuizIndex]?.options.map((option, idx) => (
                   <button
                     key={idx}
                     onClick={() => setQuizAnswers({ ...quizAnswers, [quizQuestions[currentQuizIndex]._id]: option })}
-                    className={`w-full text-left p-4 rounded-lg border-2 transition-colors ${
-                      quizAnswers[quizQuestions[currentQuizIndex]._id] === option
+                    className={`w-full text-left p-4 rounded-lg border-2 transition-colors ${quizAnswers[quizQuestions[currentQuizIndex]._id] === option
                         ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/30'
                         : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'
-                    }`}
+                      }`}
                   >
                     {option}
                   </button>
@@ -918,7 +915,7 @@ function Assignments() {
               >
                 Previous
               </button>
-              
+
               {currentQuizIndex === quizQuestions.length - 1 ? (
                 <button
                   onClick={submitQuiz}
@@ -991,21 +988,20 @@ function Assignments() {
                     <button
                       key={mode}
                       onClick={() => setTimerModeAndReset(mode)}
-                      className={`px-4 py-2 rounded-lg font-medium ${
-                        timerMode === mode
+                      className={`px-4 py-2 rounded-lg font-medium ${timerMode === mode
                           ? 'bg-blue-600 text-white'
                           : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
-                      }`}
+                        }`}
                     >
                       {mode === 'focus' ? '🎯 Focus' : mode === 'shortBreak' ? '☕ Short Break' : '🌴 Long Break'}
                     </button>
                   ))}
                 </div>
-                
+
                 <div className={`text-8xl font-bold mb-4 ${timerMode === 'focus' ? 'text-blue-600' : 'text-green-600'}`}>
                   {String(timerMinutes).padStart(2, '0')}:{String(timerSeconds).padStart(2, '0')}
                 </div>
-                
+
                 <p className="text-gray-600 dark:text-gray-400">
                   {timerMode === 'focus' ? 'Stay focused!' : 'Take a break!'}
                 </p>
@@ -1014,9 +1010,8 @@ function Assignments() {
               <div className="flex justify-center gap-4">
                 <button
                   onClick={() => setIsTimerRunning(!isTimerRunning)}
-                  className={`flex items-center gap-2 px-8 py-3 rounded-lg text-white font-semibold ${
-                    isTimerRunning ? 'bg-orange-500 hover:bg-orange-600' : 'bg-green-500 hover:bg-green-600'
-                  }`}
+                  className={`flex items-center gap-2 px-8 py-3 rounded-lg text-white font-semibold ${isTimerRunning ? 'bg-orange-500 hover:bg-orange-600' : 'bg-green-500 hover:bg-green-600'
+                    }`}
                 >
                   {isTimerRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
                   {isTimerRunning ? 'Pause' : 'Start'}
@@ -1061,7 +1056,7 @@ function Assignments() {
             <div className="flex justify-between items-center">
               <div className="flex gap-4">
                 <span className="text-gray-600 dark:text-gray-400">
-                  {tasks.filter(t => !t.completed && t.status !== 'submitted').length} pending • 
+                  {tasks.filter(t => !t.completed && t.status !== 'submitted').length} pending •
                   {tasks.filter(t => t.completed || t.status === 'submitted').length} submitted •
                   {tasks.filter(t => t.dueDate && new Date(t.dueDate) < new Date() && t.status !== 'submitted').length} late
                 </span>
@@ -1078,76 +1073,82 @@ function Assignments() {
             <div className="space-y-3">
               {tasks.map(task => (
                 <Card key={task._id} className={`${task.completed || task.status === 'submitted' ? 'opacity-75' : ''}`}>
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => toggleTaskComplete(task._id)}
-                      className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                        task.completed || task.status === 'submitted' ? 'bg-green-500 border-green-500 text-white' : 'border-gray-300 dark:border-gray-600'
-                      }`}
-                    >
-                      {(task.completed || task.status === 'submitted') && <Check className="w-4 h-4" />}
-                    </button>
-                    
-                    <div className="flex-1 min-w-0">
-                      <h3 className={`font-medium ${task.completed || task.status === 'submitted' ? 'line-through text-gray-500' : 'text-gray-900 dark:text-white'}`}>
-                        {task.title}
-                      </h3>
-                      <div className="flex flex-wrap items-center gap-3 mt-1 text-sm text-gray-500">
-                        {task.subject && <span>{task.subject}</span>}
-                        {task.dueDate && (
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {new Date(task.dueDate).toLocaleDateString()}
-                          </span>
-                        )}
-                        {task.submission && (
-                          <span className="flex items-center gap-1 text-green-600 dark:text-green-400">
-                            <Paperclip className="w-3 h-3" />
-                            {task.submission.name}
-                          </span>
-                        )}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                    {/* Main Content: Checkbox + Title */}
+                    <div className="flex items-start gap-4 flex-1 min-w-0">
+                      <button
+                        onClick={() => toggleTaskComplete(task._id)}
+                        className={`mt-1 sm:mt-0 w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${task.completed || task.status === 'submitted' ? 'bg-green-500 border-green-500 text-white' : 'border-gray-300 dark:border-gray-600'
+                          }`}
+                      >
+                        {(task.completed || task.status === 'submitted') && <Check className="w-4 h-4" />}
+                      </button>
+
+                      <div className="flex-1 min-w-0">
+                        <h3 className={`font-medium ${task.completed || task.status === 'submitted' ? 'line-through text-gray-500' : 'text-gray-900 dark:text-white'}`}>
+                          {task.title}
+                        </h3>
+                        <div className="flex flex-wrap items-center gap-3 mt-1 text-sm text-gray-500">
+                          {task.subject && <span>{task.subject}</span>}
+                          {task.dueDate && (
+                            <span className="flex items-center gap-1">
+                              <Clock className="w-3 h-3" />
+                              {new Date(task.dueDate).toLocaleDateString()}
+                            </span>
+                          )}
+                          {task.submission && (
+                            <span className="flex items-center gap-1 text-green-600 dark:text-green-400">
+                              <Paperclip className="w-3 h-3" />
+                              {task.submission.name}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Status Badge */}
-                    <span className={`px-2 py-1 rounded text-xs font-medium flex-shrink-0 ${getTaskStatusColor(task)}`}>
-                      {getTaskStatusText(task)}
-                    </span>
+                    {/* Metadata & Actions */}
+                    <div className="flex items-center justify-between sm:justify-end gap-3 pl-10 sm:pl-0">
+                      <div className="flex gap-2">
+                        {/* Status Badge */}
+                        <span className={`px-2 py-1 rounded text-xs font-medium flex-shrink-0 ${getTaskStatusColor(task)}`}>
+                          {getTaskStatusText(task)}
+                        </span>
 
-                    {/* Priority Badge */}
-                    <span className={`px-2 py-1 rounded text-xs font-medium flex-shrink-0 ${
-                      task.priority === 'high' ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' :
-                      task.priority === 'medium' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' :
-                      'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
-                    }`}>
-                      {task.priority}
-                    </span>
+                        {/* Priority Badge */}
+                        <span className={`px-2 py-1 rounded text-xs font-medium flex-shrink-0 ${task.priority === 'high' ? 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300' :
+                            task.priority === 'medium' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' :
+                              'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
+                          }`}>
+                          {task.priority}
+                        </span>
+                      </div>
 
-                    <div className="flex gap-1 flex-shrink-0">
-                      {/* Upload/View Submission Button */}
-                      {task.submission ? (
-                        <button 
-                          onClick={() => removeSubmission(task._id)} 
-                          className="p-1.5 text-green-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded"
-                          title="Remove submission"
-                        >
-                          <X className="w-4 h-4" />
+                      <div className="flex gap-1 flex-shrink-0">
+                        {/* Upload/View Submission Button */}
+                        {task.submission ? (
+                          <button
+                            onClick={() => removeSubmission(task._id)}
+                            className="p-1.5 text-green-600 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded"
+                            title="Remove submission"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => openSubmissionModal(task)}
+                            className="p-1.5 text-gray-500 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/30 rounded"
+                            title="Upload submission"
+                          >
+                            <Upload className="w-4 h-4" />
+                          </button>
+                        )}
+                        <button onClick={() => editTask(task)} className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded">
+                          <Edit2 className="w-4 h-4" />
                         </button>
-                      ) : (
-                        <button 
-                          onClick={() => openSubmissionModal(task)} 
-                          className="p-1.5 text-gray-500 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/30 rounded"
-                          title="Upload submission"
-                        >
-                          <Upload className="w-4 h-4" />
+                        <button onClick={() => deleteTask(task._id)} className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded">
+                          <Trash2 className="w-4 h-4" />
                         </button>
-                      )}
-                      <button onClick={() => editTask(task)} className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded">
-                        <Edit2 className="w-4 h-4" />
-                      </button>
-                      <button onClick={() => deleteTask(task._id)} className="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      </div>
                     </div>
                   </div>
                 </Card>
@@ -1165,7 +1166,7 @@ function Assignments() {
         )}
 
         {/* ==================== MODALS ==================== */}
-        
+
         {/* Material Upload Modal */}
         {showMaterialModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -1213,9 +1214,9 @@ function Assignments() {
                     <button onClick={() => { setShowCustomInput(null); setNewCustomSubject(''); }} className="px-3 py-2 bg-gray-300 dark:bg-gray-600 rounded-lg">✕</button>
                   </div>
                 )}
-                
+
                 <input type="file" ref={fileInputRef} onChange={handleFileSelect} accept=".pdf,image/*" className="hidden" />
-                
+
                 {!materialForm.file ? (
                   <button
                     onClick={() => fileInputRef.current?.click()}
@@ -1416,7 +1417,7 @@ function Assignments() {
                   )}
                 </div>
 
-                <div 
+                <div
                   onClick={() => taskFileInputRef.current?.click()}
                   className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                 >
@@ -1440,8 +1441,8 @@ function Assignments() {
                 </div>
               </div>
               <div className="flex justify-end gap-3 p-4 border-t border-gray-200 dark:border-gray-700">
-                <button 
-                  onClick={() => { setShowSubmissionModal(false); setSubmittingTask(null); }} 
+                <button
+                  onClick={() => { setShowSubmissionModal(false); setSubmittingTask(null); }}
                   className="px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                 >
                   Cancel

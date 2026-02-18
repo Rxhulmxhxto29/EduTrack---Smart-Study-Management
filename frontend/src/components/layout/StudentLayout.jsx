@@ -3,11 +3,11 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useExamMode } from '../../contexts/ExamModeContext';
-import { 
-  BookOpen, 
-  FileText, 
-  Calendar, 
-  TrendingUp, 
+import {
+  BookOpen,
+  FileText,
+  Calendar,
+  TrendingUp,
   Target,
   User,
   Menu,
@@ -57,7 +57,7 @@ function StudentLayout({ children }) {
   const [showCalculator, setShowCalculator] = useState(false);
   const [showNotepad, setShowNotepad] = useState(false);
   const [headerSearch, setHeaderSearch] = useState('');
-  
+
   // Calculator state
   const [calcDisplay, setCalcDisplay] = useState('0');
   const [calcExpression, setCalcExpression] = useState('');
@@ -65,7 +65,7 @@ function StudentLayout({ children }) {
   const [calcMode, setCalcMode] = useState('deg'); // deg or rad
   const [calcMemory, setCalcMemory] = useState(0);
   const [isNewNumber, setIsNewNumber] = useState(true);
-  
+
   // Notepad state
   const [notes, setNotes] = useState(() => {
     const saved = localStorage.getItem('edutrack_quicknotes');
@@ -73,7 +73,7 @@ function StudentLayout({ children }) {
   });
   const [activeNoteId, setActiveNoteId] = useState(1);
   const [noteContent, setNoteContent] = useState('');
-  
+
   // Real-time clock state
   const [currentTime, setCurrentTime] = useState(new Date());
   const { user, logout } = useAuth();
@@ -142,7 +142,7 @@ function StudentLayout({ children }) {
     const lastStudyDate = studyStreak.lastStudyDate ? new Date(studyStreak.lastStudyDate) : null;
     const todayStr = now.toDateString();
     const hasStudiedToday = lastStudyDate && lastStudyDate.toDateString() === todayStr;
-    
+
     if (!hasStudiedToday && now.getHours() >= 10) {
       notifs.push({
         id: 'study-reminder',
@@ -151,7 +151,7 @@ function StudentLayout({ children }) {
         iconColor: 'text-blue-500',
         bgColor: 'bg-blue-100 dark:bg-blue-900/30',
         title: 'Study Reminder',
-        message: studyStreak.currentStreak > 0 
+        message: studyStreak.currentStreak > 0
           ? `Don't break your ${studyStreak.currentStreak}-day streak! Start studying now.`
           : 'Start your study session today to build your streak!',
         time: 'Today',
@@ -192,7 +192,7 @@ function StudentLayout({ children }) {
           // Remove lower achievement if exists
           const idx = notifs.findIndex(n => n.type === 'achievement');
           if (idx > -1) notifs.splice(idx, 1);
-          
+
           notifs.push({
             id: `achievement-${milestone}`,
             type: 'achievement',
@@ -216,12 +216,12 @@ function StudentLayout({ children }) {
     const today = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()];
     const currentHour = now.getHours();
     const currentMin = now.getMinutes();
-    
+
     schedule.forEach(entry => {
       if (entry.day === today && entry.startTime) {
         const [startHour, startMin] = entry.startTime.split(':').map(Number);
         const minutesUntil = (startHour * 60 + startMin) - (currentHour * 60 + currentMin);
-        
+
         if (minutesUntil > 0 && minutesUntil <= 60) {
           notifs.push({
             id: `class-${entry.id || entry.subject}`,
@@ -277,7 +277,7 @@ function StudentLayout({ children }) {
     if (!readNotifications.includes(notificationId)) {
       readNotifications.push(notificationId);
       localStorage.setItem('edutrack_read_notifications', JSON.stringify(readNotifications));
-      setNotifications(prev => prev.map(n => 
+      setNotifications(prev => prev.map(n =>
         n.id === notificationId ? { ...n, read: true } : n
       ));
     }
@@ -300,7 +300,7 @@ function StudentLayout({ children }) {
   };
 
   // ==================== SCIENTIFIC CALCULATOR ====================
-  
+
   // Load active note content when switching notes
   useEffect(() => {
     const activeNote = notes.find(n => n.id === activeNoteId);
@@ -378,10 +378,10 @@ function StudentLayout({ children }) {
         .replace(/\^/g, '**')
         .replace(/π/g, Math.PI.toString())
         .replace(/e(?![xp])/g, Math.E.toString());
-      
+
       // eslint-disable-next-line no-new-func
       const result = new Function('return ' + sanitized)();
-      
+
       if (isNaN(result) || !isFinite(result)) {
         setCalcDisplay('Error');
       } else {
@@ -426,7 +426,7 @@ function StudentLayout({ children }) {
   };
 
   // ==================== NOTEPAD FUNCTIONS ====================
-  
+
   const saveNotes = useCallback((updatedNotes) => {
     localStorage.setItem('edutrack_quicknotes', JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
@@ -434,7 +434,7 @@ function StudentLayout({ children }) {
 
   const handleNoteChange = (content) => {
     setNoteContent(content);
-    const updatedNotes = notes.map(n => 
+    const updatedNotes = notes.map(n =>
       n.id === activeNoteId ? { ...n, content, updatedAt: new Date().toISOString() } : n
     );
     saveNotes(updatedNotes);
@@ -468,7 +468,7 @@ function StudentLayout({ children }) {
   };
 
   const renameNote = (noteId, newTitle) => {
-    const updatedNotes = notes.map(n => 
+    const updatedNotes = notes.map(n =>
       n.id === noteId ? { ...n, title: newTitle } : n
     );
     saveNotes(updatedNotes);
@@ -530,7 +530,7 @@ function StudentLayout({ children }) {
   const handleExamModeToggle = () => {
     toggleExamMode();
     if (!examModeActive) {
-      toast.success('🎯 Focus Mode Activated!', { 
+      toast.success('🎯 Focus Mode Activated!', {
         duration: 3000,
         style: { background: '#1f2937', color: '#fff' }
       });
@@ -544,7 +544,7 @@ function StudentLayout({ children }) {
     <div className={`min-h-screen bg-gradient-mesh transition-all duration-500 ease-in-out`}>
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ease-in-out"
           onClick={() => setSidebarOpen(false)}
         />
@@ -582,7 +582,7 @@ function StudentLayout({ children }) {
                   </div>
                 )}
               </Link>
-              <button 
+              <button
                 onClick={() => setSidebarOpen(false)}
                 className="lg:hidden p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl"
               >
@@ -628,8 +628,8 @@ function StudentLayout({ children }) {
                     group flex items-center ${sidebarCollapsed ? 'justify-center px-2' : 'gap-3 px-4'} py-3 rounded-xl
                     transition-all duration-300 ease-out
                     hover:scale-[1.02] active:scale-[0.98]
-                    ${active 
-                      ? `bg-gradient-to-r ${item.color} text-white shadow-lg shadow-${item.color.split('-')[1]}-500/25` 
+                    ${active
+                      ? `bg-gradient-to-r ${item.color} text-white shadow-lg shadow-${item.color.split('-')[1]}-500/25`
                       : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100/80 dark:hover:bg-gray-800/60'
                     }
                   `}
@@ -638,8 +638,8 @@ function StudentLayout({ children }) {
                 >
                   <div className={`
                     p-2 rounded-lg transition-all duration-300
-                    ${active 
-                      ? 'bg-white/20' 
+                    ${active
+                      ? 'bg-white/20'
                       : `bg-gradient-to-r ${item.color} bg-opacity-10 group-hover:scale-110`
                     }
                   `}>
@@ -649,9 +649,8 @@ function StudentLayout({ children }) {
                     <>
                       <span className="font-medium transition-all duration-300">{item.name}</span>
                       {item.badge && (
-                        <span className={`ml-1 px-1.5 py-0.5 text-[10px] font-bold rounded-md transition-all duration-300 ${
-                          active ? 'bg-white/30 text-white' : 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400'
-                        }`}>
+                        <span className={`ml-1 px-1.5 py-0.5 text-[10px] font-bold rounded-md transition-all duration-300 ${active ? 'bg-white/30 text-white' : 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400'
+                          }`}>
                           {item.badge}
                         </span>
                       )}
@@ -679,16 +678,16 @@ function StudentLayout({ children }) {
                 </div>
                 <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 
                             rounded-xl p-3 text-center">
-                <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
-                  {JSON.parse(localStorage.getItem('edutrack_tasks') || '[]').filter(t => t.completed).length}
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Done</p>
+                  <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+                    {JSON.parse(localStorage.getItem('edutrack_tasks') || '[]').filter(t => t.completed).length}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Done</p>
+                </div>
               </div>
-            </div>
             )}
 
             {/* User Card */}
-            <div 
+            <div
               onClick={() => { navigate('/profile'); setSidebarOpen(false); }}
               className={`flex items-center ${sidebarCollapsed ? 'justify-center p-2' : 'gap-3 p-3'} rounded-xl cursor-pointer
                        bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800
@@ -697,8 +696,8 @@ function StudentLayout({ children }) {
             >
               <div className="relative">
                 {user?.avatar ? (
-                  <img 
-                    src={user.avatar} 
+                  <img
+                    src={user.avatar}
                     alt={user?.name || 'User'}
                     className={`${sidebarCollapsed ? 'w-10 h-10' : 'w-11 h-11'} rounded-xl object-cover shadow-lg`}
                   />
@@ -767,8 +766,8 @@ function StudentLayout({ children }) {
         {/* Top Header */}
         <header className={`
           sticky top-0 z-30 transition-all duration-300 ease-out
-          ${scrolled 
-            ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-2xl shadow-lg shadow-gray-200/50 dark:shadow-black/30' 
+          ${scrolled
+            ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-2xl shadow-lg shadow-gray-200/50 dark:shadow-black/30'
             : 'bg-transparent'
           }
           ${examModeActive ? 'border-b-2 border-amber-500' : ''}
@@ -784,7 +783,7 @@ function StudentLayout({ children }) {
               >
                 <Menu size={24} />
               </button>
-              
+
               {/* Current Page Indicator */}
               <div className="hidden sm:flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-indigo-500 animate-pulse" />
@@ -833,7 +832,7 @@ function StudentLayout({ children }) {
                 }
               }} className="relative w-full">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input 
+                <input
                   type="text"
                   value={headerSearch}
                   onChange={(e) => setHeaderSearch(e.target.value)}
@@ -859,8 +858,8 @@ function StudentLayout({ children }) {
                   flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm
                   transition-all duration-300 ease-out
                   hover:scale-105 active:scale-95
-                  ${examModeActive 
-                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40' 
+                  ${examModeActive
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30 hover:shadow-xl hover:shadow-amber-500/40'
                     : 'bg-gray-100/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                   }
                 `}
@@ -870,10 +869,10 @@ function StudentLayout({ children }) {
                   {examModeActive ? 'Exit Focus' : 'Focus Mode'}
                 </span>
               </button>
-              
+
               {/* Notifications */}
               <div className="relative notifications-container">
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowNotifications(!showNotifications);
@@ -895,7 +894,8 @@ function StudentLayout({ children }) {
 
                 {/* Notification Dropdown */}
                 {showNotifications && (
-                  <div className="absolute right-0 top-full mt-2 w-80 sm:w-96
+                  <div className="fixed inset-x-4 top-[70px] sm:absolute sm:inset-auto sm:right-0 sm:top-full mt-2 
+                                w-auto sm:w-96
                                 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl
                                 border border-gray-200 dark:border-gray-700
                                 overflow-hidden z-50 animate-slide-in">
@@ -917,7 +917,7 @@ function StudentLayout({ children }) {
                           )}
                         </div>
                         {unreadCount > 0 && (
-                          <button 
+                          <button
                             onClick={markAllAsRead}
                             className="text-xs text-indigo-500 hover:text-indigo-600 
                                      dark:text-indigo-400 font-medium"
@@ -929,7 +929,7 @@ function StudentLayout({ children }) {
                     </div>
 
                     {/* Notification List */}
-                    <div className="max-h-80 overflow-y-auto">
+                    <div className="max-h-[60vh] sm:max-h-80 overflow-y-auto">
                       {notifications.length === 0 ? (
                         <div className="px-4 py-8 text-center">
                           <div className="w-12 h-12 mx-auto mb-3 rounded-full 
@@ -948,7 +948,7 @@ function StudentLayout({ children }) {
                         notifications.map((notif) => {
                           const Icon = notif.icon;
                           return (
-                            <div 
+                            <div
                               key={notif.id}
                               className={`
                                 px-4 py-3 border-b border-gray-100 dark:border-gray-800
@@ -968,11 +968,10 @@ function StudentLayout({ children }) {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-start justify-between gap-2">
-                                    <p className={`text-sm font-medium ${
-                                      !notif.read 
-                                        ? 'text-gray-900 dark:text-white' 
+                                    <p className={`text-sm font-medium ${!notif.read
+                                        ? 'text-gray-900 dark:text-white'
                                         : 'text-gray-600 dark:text-gray-300'
-                                    }`}>
+                                      }`}>
                                       {notif.title}
                                     </p>
                                     {!notif.read && (
@@ -1019,7 +1018,7 @@ function StudentLayout({ children }) {
 
               {/* Scientific Calculator */}
               <div className="relative calculator-container">
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowCalculator(!showCalculator);
@@ -1035,7 +1034,8 @@ function StudentLayout({ children }) {
 
                 {/* Calculator Dropdown */}
                 {showCalculator && (
-                  <div className="absolute right-0 top-full mt-2 w-64
+                  <div className="fixed inset-x-4 top-[70px] sm:absolute sm:inset-auto sm:right-0 sm:top-full mt-2 
+                                w-auto sm:w-[320px]
                                 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl shadow-gray-300/50 dark:shadow-black/50
                                 border border-gray-200 dark:border-gray-700
                                 overflow-hidden z-50 
@@ -1053,11 +1053,10 @@ function StudentLayout({ children }) {
                         <div className="flex gap-1">
                           <button
                             onClick={() => setCalcMode(calcMode === 'deg' ? 'rad' : 'deg')}
-                            className={`px-2 py-1 text-[10px] font-bold rounded transition-all duration-200 ${
-                              calcMode === 'deg' 
-                                ? 'bg-emerald-500 text-white' 
+                            className={`px-2 py-1 text-[10px] font-bold rounded transition-all duration-200 ${calcMode === 'deg'
+                                ? 'bg-emerald-500 text-white'
                                 : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-                            }`}
+                              }`}
                           >
                             {calcMode.toUpperCase()}
                           </button>
@@ -1139,24 +1138,24 @@ function StudentLayout({ children }) {
                     <div className="grid grid-cols-4 gap-0.5 p-1.5 border-t border-gray-200 dark:border-gray-700">
                       <button onClick={handleCalcClear} className="py-2 text-xs font-bold rounded bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200">AC</button>
                       <button onClick={() => handleCalcFunction('fact')} className="py-2 text-xs font-bold rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300">n!</button>
-                      <button onClick={() => { const num = parseFloat(calcDisplay); setCalcDisplay((1/num).toString()); }} className="py-2 text-xs font-bold rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300">1/x</button>
+                      <button onClick={() => { const num = parseFloat(calcDisplay); setCalcDisplay((1 / num).toString()); }} className="py-2 text-xs font-bold rounded bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300">1/x</button>
                       <button onClick={() => handleCalcOperator('÷')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">÷</button>
-                      
+
                       {['7', '8', '9'].map(num => (
                         <button key={num} onClick={() => handleCalcInput(num)} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
                       ))}
                       <button onClick={() => handleCalcOperator('×')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">×</button>
-                      
+
                       {['4', '5', '6'].map(num => (
                         <button key={num} onClick={() => handleCalcInput(num)} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
                       ))}
                       <button onClick={() => handleCalcOperator('-')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">−</button>
-                      
+
                       {['1', '2', '3'].map(num => (
                         <button key={num} onClick={() => handleCalcInput(num)} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">{num}</button>
                       ))}
                       <button onClick={() => handleCalcOperator('+')} className="py-2 text-xs font-bold rounded bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 hover:bg-amber-200">+</button>
-                      
+
                       <button onClick={() => { const num = parseFloat(calcDisplay); setCalcDisplay((-num).toString()); }} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">±</button>
                       <button onClick={() => handleCalcInput('0')} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">0</button>
                       <button onClick={() => handleCalcInput('.')} className="py-2 text-sm font-semibold rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">.</button>
@@ -1171,7 +1170,7 @@ function StudentLayout({ children }) {
                         </div>
                         {calcHistory.slice().reverse().map((item, idx) => (
                           <div key={idx} className="px-3 py-1 text-xs text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer"
-                               onClick={() => { setCalcDisplay(item.result); setIsNewNumber(true); }}>
+                            onClick={() => { setCalcDisplay(item.result); setIsNewNumber(true); }}>
                             <span className="text-gray-400">{item.expression} = </span>
                             <span className="font-semibold text-gray-900 dark:text-white">{item.result}</span>
                           </div>
@@ -1184,7 +1183,7 @@ function StudentLayout({ children }) {
 
               {/* Quick Notepad */}
               <div className="relative notepad-container">
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowNotepad(!showNotepad);
@@ -1200,7 +1199,8 @@ function StudentLayout({ children }) {
 
                 {/* Notepad Dropdown */}
                 {showNotepad && (
-                  <div className="absolute right-0 top-full mt-2 w-[340px] sm:w-[420px]
+                  <div className="fixed inset-x-4 top-[70px] sm:absolute sm:inset-auto sm:right-0 sm:top-full mt-2 
+                                w-auto sm:w-[420px]
                                 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl shadow-gray-300/50 dark:shadow-black/50
                                 border border-gray-200 dark:border-gray-700
                                 overflow-hidden z-50 
@@ -1243,8 +1243,8 @@ function StudentLayout({ children }) {
                             flex items-center gap-1.5 px-3 py-2 rounded-lg
                             text-xs font-medium whitespace-nowrap transition-all
                             min-w-[80px] justify-center
-                            ${activeNoteId === note.id 
-                              ? 'bg-amber-500 text-white shadow-md shadow-amber-500/30' 
+                            ${activeNoteId === note.id
+                              ? 'bg-amber-500 text-white shadow-md shadow-amber-500/30'
                               : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-amber-100 dark:hover:bg-amber-900/30 border border-gray-200 dark:border-gray-600'}
                           `}
                           onClick={() => setActiveNoteId(note.id)}
@@ -1350,7 +1350,7 @@ function StudentLayout({ children }) {
                       </p>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] text-gray-400 dark:text-gray-500">
-                          {notes.find(n => n.id === activeNoteId)?.updatedAt 
+                          {notes.find(n => n.id === activeNoteId)?.updatedAt
                             ? `Updated ${new Date(notes.find(n => n.id === activeNoteId).updatedAt).toLocaleTimeString()}`
                             : 'New note'}
                         </span>
@@ -1363,7 +1363,7 @@ function StudentLayout({ children }) {
                   </div>
                 )}
               </div>
-              
+
               {/* Theme Toggle */}
               <button
                 onClick={toggleDarkMode}
